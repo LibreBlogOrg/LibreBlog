@@ -51,7 +51,7 @@ The best way to use LibreBlog is to install it as a browser extension. That way,
 1. Clone this repository.
 2. Inside the repository folder, run: `npm install`.
 3. In the previous step, the necessary scripts will be copied to the *dependencies* folder, so you can delete the *node_modules* folder.
-4. Load the unpacked extension [(See how)](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked).
+4. Load the unpacked extension ([See how](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)).
 
 ## Limitations
 
