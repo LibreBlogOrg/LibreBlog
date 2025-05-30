@@ -13,20 +13,20 @@ Below is an overview of the features included in this project and those that are
 * Basic search functionality (using JavaScript)
 * Easy insertion of **references** in articles
 * Possibility of creating **relations** between articles to make them richer and provide more context
-* SEO optimization (Open Graph, Semantic HTML, Schema.org and Simple Dublin Core)
+* SEO optimization (Semantic HTML, Sitemap, Open Graph, Schema.org and Simple Dublin Core)
 * Responsive design
 * Pagination
 * RSS for the main page and sections
 * Multimedia management (currently only images)
-* Possibility of exporting **all** the content used to generate your website
-* Preview your website (using iframes)
+* Possibility of exporting and importing all the content used to generate your website
+* Website preview (using iframes)
 * Designed to be easily extensible: customize themes and templates, create your own types of articles, sections, etc.
-* Internationalization (and text customization)
-* No cookies, no tracking, almost no JavaScript (only for enabling search and sharing functionalities)
+* String Customization
+* No cookies, no tracking, almost no JavaScript (only for enabling search and sharing functionalities, and to adjust dates)
 * The input fields of this project were designed with journalists in mind (Summary, Editorial Notes...)
 * Possibility of installing LibreBlog as a Chrome Extension
 
-**Not provided** (but can be easily extended with web services that offer them):
+**Not provided** (but you can easily add these features using external web services):
 * Analytics
 * Commenting System (those similar to Disqus)
 * Feedback functionality (using Google Forms, for example)
