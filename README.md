@@ -18,6 +18,7 @@ Below is an overview of the features included in this project and those that are
 * Pagination
 * RSS for the main page and sections
 * Multimedia management (currently only images)
+* Basic image optimization
 * Possibility of exporting and importing all the content used to generate your website
 * Website preview (using iframes)
 * Designed to be easily extensible: customize themes and templates, create your own types of articles, sections, etc.
