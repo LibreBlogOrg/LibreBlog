@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <title>LibreBlog - A tool for independent journalism</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  
+  <body>
+    <div id="horizontal-bar">
+      <div id="horizontal-bar-contents">
+        <div id="horizontal-bar-logo">
+          <a href="https://libreblog.org"><img src="images/logo.svg" alt="Logo" height="24px" /></a>
+        </div>
+        <div id="dropdown-menu">
+          <img id="dropdown-menu-icon" class="icon" src="images/menu.svg"/>
+          <ul id="dropdown-menu-list">
+            <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+            <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+            <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+            <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+            <li><a href="/relations.html"><img class="icon" src="images/relations.svg"/>Relations</a></li>
+            <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+            <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+            <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+            <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+            <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+            <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+            <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="vertical-navbar">
+      <ul>
+        <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+        <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+        <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+        <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+        <li><a href="/relations.html"><img class="icon" src="images/relations.svg" />Relations</a></li>
+        <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+        <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+        <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+        <li class="active"><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a><div class="triangle"></div></li>
+        <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+        <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+        <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+      </ul>
+      <div id="logo-bottom">
+        <a href="https://libreblog.org" target="_blank"><img src="images/logo.svg" alt="Logo" width="110px" /></a>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="row">
+        <div class="column60">
+          <div class="title-div">Edit Author Profile</div>
+          <div id="editor-toolbar">
+            <div id="disposable-toolbar" class="toolbar">
+              <button><img src="images/bold.svg"/></button>
+              <button><img src="images/italic.svg"/></button>
+              <button><img src="images/heading.svg"/></button>
+              <button><img src="images/undo.svg"/></button>
+              <button><img src="images/image.svg"/></button>
+              <button><img src="images/save.svg"/></button>
+            </div>
+          </div>
+          <div id="editor-container">
+            <div id="editor"></div>
+          </div>
+        </div>
+        <div class="column40">
+          <div class="title-div"><div id="properties-label">Profile Details</div></div>
+          <div class="form-div">
+            <form id="author-form" autocomplete="off">
+              <label for="uri">ID <span class="required-field-label">(required)</span></label>
+              <input type="text" id="uri" placeholder="author-01" pattern="^[a-z0-9\-]+$" title="Lowercase letters, numbers and hyphens only" autocorrect="off" autocapitalize="off" spellcheck="false" required>
+              <label for="name">Name <span class="required-field-label">(required)</span></label>
+              <input type="text" id="name" placeholder="Name" spellcheck="false" required>
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="contact@mywebsite.com">
+              <label id="type-label" for="type" style="display:none">Type of author <span class="required-field-label">(required)</span></label>
+              <select id="type" style="display:none" required>
+                <option value="" selected disabled>Choose one</option>
+              </select>
+              <label for="bio">Bio</label>
+              <textarea type="text" id="bio" placeholder="About me (Markdown format supported)" rows="2" spellcheck="false"></textarea>
+              <label for="contact">Contact and social media</label>
+              <textarea type="text" id="contact" placeholder="Contact information (Markdown format supported)" rows="2" spellcheck="false"></textarea>
+              <label for="location">Location</label>
+              <input type="text" id="location" placeholder="Where he or she is writing from" spellcheck="false">
+              <datalist id="authors-list"></datalist>
+              <label for="photo">Picture<a id="add-photo" class="button">Pick one</a></label>
+              <input type="text" id="photo" placeholder="image-id.jpg or https://my.url/image.jpg" autocorrect="off" autocapitalize="off" spellcheck="false" />
+
+              <div id="updated-div"></div>
+              
+              <input id="save" type="submit" value="Save">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="preview-modal" class="modal">
+      <div class="modal-content">
+        <span id="close-preview-modal" class="close">&times;</span>
+        <div id="preview-container">
+          <div id="gw-loader" class="loader-container-wrapper">
+            <div class="loader-container">
+              <span>Wait...</span>
+              <span class="loader"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div id="media-modal" class="modal">
+      <div class="modal-content">
+        <span id="close-media-modal" class="close">&times;</span>
+        <div id="media-modal-title">
+          <span>Choose a file</span>
+          <input id="filename-filter" type="text" placeholder="Filter by file name..."/></div>
+        <div id="media-container">
+        </div>
+      </div>
+    </div>
+    
+    <script type="module" src="js/script.js"></script> 
+  </body>
+</html>

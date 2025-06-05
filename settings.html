@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <title>LibreBlog - A tool for independent journalism</title> 
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  
+  <body>
+    <div id="horizontal-bar">
+      <div id="horizontal-bar-contents">
+        <div id="horizontal-bar-logo">
+          <a href="https://libreblog.org"><img src="images/logo.svg" alt="Logo" height="24px" /></a>
+        </div>
+        <div id="dropdown-menu">
+          <img id="dropdown-menu-icon" class="icon" src="images/menu.svg"/>
+          <ul id="dropdown-menu-list">
+            <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+            <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+            <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+            <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+            <li><a href="/relations.html"><img class="icon" src="images/relations.svg"/>Relations</a></li>
+            <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+            <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+            <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+            <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+            <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+            <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+            <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="vertical-navbar">
+      <ul>
+        <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+        <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+        <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+        <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+        <li><a href="/relations.html"><img class="icon" src="images/relations.svg"/>Relations</a></li>
+        <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+        <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+        <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+        <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+        <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+        <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+        <li class="active"><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a><div class="triangle"></div></li>
+      </ul>
+      <div id="logo-bottom">
+        <a href="https://libreblog.org" target="_blank"><img src="images/logo.svg" alt="Logo" width="110px" /></a>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="title-div">Settings</div>
+      <div class="form-div">
+        <form id="settings-form" autocomplete="off">
+          <div class="subtitle-div">Basic settings</div>
+          <label for="website-name">Website name</label>
+          <input type="text" id="website-name" placeholder="My Website" autocorrect="off" autocapitalize="off" spellcheck="false"><br/>
+          <label for="website-title">Website title</label>
+          <input type="text" id="website-title" placeholder="My Website — The best website" autocorrect="off" autocapitalize="off" spellcheck="false"><br/>
+          <label for="website-url">Website URL</label>
+          <input type="url" id="website-url" pattern=".*[^\/]$" placeholder="https://mywebsite.com (no slash at the end)"><br/>
+          <label for="website-description">Website description</label>
+          <input type="text" id="website-description" placeholder="My personal website"><br/>
+          <label for="website-logo">Website logo <span class="info-span" data-title="It will be displayed in the header of your website."><img src="images/info.svg"/></span></label>
+          <input type="text" id="website-logo" placeholder="https://some.url.com/logo.png or image-id.png" autocorrect="off" autocapitalize="off" spellcheck="false"><br/>
+          <label for="website-favicon">Website favicon <span class="info-span" data-title="Favicon is a small icon that is displayed next to the title&#010;of your website in the browser tab."><img src="images/info.svg"/></span></label>
+          <input type="text" id="website-favicon" placeholder="https://some.url.com/favicon.ico or image-id.ico" autocorrect="off" autocapitalize="off" spellcheck="false"><br/>
+          <label for="website-language">Main language of the website</label>
+          <select id="website-language">
+            <option value="" selected disabled></option>
+            <option value="af">Afrikaans</option>
+            <option value="sq">Albanian</option>
+            <option value="ar">Arabic</option>
+            <option value="hy">Armenian</option>
+            <option value="eu">Basque</option>
+            <option value="bn">Bengali</option>
+            <option value="bg">Bulgarian</option>
+            <option value="ca">Catalan</option>
+            <option value="km">Cambodian</option>
+            <option value="zh">Chinese (Mandarin)</option>
+            <option value="hr">Croatian</option>
+            <option value="cs">Czech</option>
+            <option value="da">Danish</option>
+            <option value="nl">Dutch</option>
+            <option value="en">English</option>
+            <option value="et">Estonian</option>
+            <option value="fj">Fiji</option>
+            <option value="fi">Finnish</option>
+            <option value="fr">French</option>
+            <option value="ka">Georgian</option>
+            <option value="de">German</option>
+            <option value="el">Greek</option>
+            <option value="gu">Gujarati</option>
+            <option value="he">Hebrew</option>
+            <option value="hi">Hindi</option>
+            <option value="hu">Hungarian</option>
+            <option value="is">Icelandic</option>
+            <option value="id">Indonesian</option>
+            <option value="ga">Irish</option>
+            <option value="it">Italian</option>
+            <option value="ja">Japanese</option>
+            <option value="jw">Javanese</option>
+            <option value="ko">Korean</option>
+            <option value="la">Latin</option>
+            <option value="lv">Latvian</option>
+            <option value="lt">Lithuanian</option>
+            <option value="mk">Macedonian</option>
+            <option value="ms">Malay</option>
+            <option value="ml">Malayalam</option>
+            <option value="mt">Maltese</option>
+            <option value="mi">Maori</option>
+            <option value="mr">Marathi</option>
+            <option value="mn">Mongolian</option>
+            <option value="ne">Nepali</option>
+            <option value="no">Norwegian</option>
+            <option value="fa">Persian</option>
+            <option value="pl">Polish</option>
+            <option value="pt">Portuguese</option>
+            <option value="pa">Punjabi</option>
+            <option value="qu">Quechua</option>
+            <option value="ro">Romanian</option>
+            <option value="ru">Russian</option>
+            <option value="sm">Samoan</option>
+            <option value="sr">Serbian</option>
+            <option value="sk">Slovak</option>
+            <option value="sl">Slovenian</option>
+            <option value="es">Spanish</option>
+            <option value="sw">Swahili</option>
+            <option value="sv">Swedish</option>
+            <option value="ta">Tamil</option>
+            <option value="tt">Tatar</option>
+            <option value="te">Telugu</option>
+            <option value="th">Thai</option>
+            <option value="bo">Tibetan</option>
+            <option value="to">Tonga</option>
+            <option value="tr">Turkish</option>
+            <option value="uk">Ukrainian</option>
+            <option value="ur">Urdu</option>
+            <option value="uz">Uzbek</option>
+            <option value="vi">Vietnamese</option>
+            <option value="cy">Welsh</option>
+            <option value="xh">Xhosa</option>
+          </select>
+          <label for="website-timezone">Time zone</label>
+          <select id="website-timezone">
+            <option value="" selected></option>
+            <option value="-12:00">(UTC-12:00) Eniwetok, Kwajalein</option>
+            <option value="-11:00">(UTC-11:00) Midway Island, Samoa</option>
+            <option value="-10:00">(UTC-10:00) Hawaii</option>
+            <option value="-09:50">(UTC-09:30) Taiohae</option>
+            <option value="-09:00">(UTC-09:00) Alaska</option>
+            <option value="-08:00">(UTC-08:00) Pacific Time</option>
+            <option value="-07:00">(UTC-07:00) Mountain Time</option>
+            <option value="-06:00">(UTC-06:00) Central Time, Mexico City</option>
+            <option value="-05:00">(UTC-05:00) Eastern Time, Bogota</option>
+            <option value="-04:50">(UTC-04:30) Caracas</option>
+            <option value="-04:00">(UTC-04:00) Atlantic Time (CA), La Paz</option>
+            <option value="-03:50">(UTC-03:30) Newfoundland</option>
+            <option value="-03:00">(UTC-03:00) Brasilia, Buenos Aires</option>
+            <option value="-02:00">(UTC-02:00) Mid-Atlantic</option>
+            <option value="-01:00">(UTC-01:00) Azores, Cape Verde</option>
+            <option value="+00:00">(UTC+00:00) London, Lisbon, Casablanca</option>
+            <option value="+01:00">(UTC+01:00) Brussels, Madrid, Paris</option>
+            <option value="+02:00">(UTC+02:00) Kaliningrad, Cape Town</option>
+            <option value="+03:00">(UTC+03:00) Baghdad, Riyadh, Moscow</option>
+            <option value="+03:50">(UTC+03:30) Tehran</option>
+            <option value="+04:00">(UTC+04:00) Abu Dhabi, Muscat, Baku</option>
+            <option value="+04:50">(UTC+04:30) Kabul</option>
+            <option value="+05:00">(UTC+05:00) Ekaterinburg, Islamabad</option>
+            <option value="+05:50">(UTC+05:30) Bombay, Calcutta, Madras</option>
+            <option value="+05:75">(UTC+05:45) Kathmandu, Pokhara</option>
+            <option value="+06:00">(UTC+06:00) Almaty, Dhaka, Colombo</option>
+            <option value="+06:50">(UTC+06:30) Yangon, Mandalay</option>
+            <option value="+07:00">(UTC+07:00) Bangkok, Hanoi, Jakarta</option>
+            <option value="+08:00">(UTC+08:00) Beijing, Perth, Singapore</option>
+            <option value="+08:75">(UTC+08:45) Eucla</option>
+            <option value="+09:00">(UTC+09:00) Tokyo, Seoul, Osaka</option>
+            <option value="+09:50">(UTC+09:30) Adelaide, Darwin</option>
+            <option value="+10:00">(UTC+10:00) Eastern Australia</option>
+            <option value="+10:50">(UTC+10:30) Lord Howe Island</option>
+            <option value="+11:00">(UTC+11:00) Magadan, Solomon Islands</option>
+            <option value="+11:50">(UTC+11:30) Norfolk Island</option>
+            <option value="+12:00">(UTC+12:00) Auckland, Wellington</option>
+            <option value="+12:75">(UTC+12:45) Chatham Islands</option>
+            <option value="+13:00">(UTC+13:00) Apia, Nukualofa</option>
+            <option value="+14:00">(UTC+14:00) Line Islands</option>
+          </select>
+          <label for="timezone-abbreviation">Choose a time zone <a class="blue-link" href="https://en.wikipedia.org/wiki/List_of_time_zone_abbreviations" target="_blank">abbreviation</a></label>
+          <input type="text" id="timezone-abbreviation" placeholder="GMT" autocorrect="off" autocapitalize="off" spellcheck="false"><br/>
+          <div class="input-number-div">
+            <label for="max-articles-mainpage">Maximum number of articles on the main page</label>
+            <div class="input-wrapper"><input type="number" min=0 id="max-articles-mainpage" placeholder="20"></div>
+          </div>
+          <div class="input-number-div">
+            <label for="max-articles-section-page">Maximum number of articles on section pages</label>
+            <div class="input-wrapper"><input type="number" min=0 id="max-articles-section-page" placeholder="20"></div>
+          </div>
+          <div class="input-number-div">         
+            <label for="max-articles-series-page">Maximum number of articles on series pages</label>
+            <div class="input-wrapper"><input type="number" min=0 id="max-articles-series-page" placeholder="20"></div>
+          </div>
+          <div class="input-number-div">
+            <label for="max-articles-author-page">Maximum number of articles on author pages</label>
+            <div class="input-wrapper"><input type="number" min=0 id="max-articles-author-page" placeholder="20"></div>
+          </div>
+          <div class="input-number-div">
+            <label for="max-series-mainpage">Maximum number of series on the main page</label>
+            <div class="input-wrapper"><input type="number" min=0 id="max-series-mainpage" placeholder="10"></div>
+          </div>
+          <div class="input-number-div">
+            <label for="max-series-section-page">Maximum number of series on section pages</label>
+            <div class="input-wrapper"><input type="number" min=0 id="max-series-section-page" placeholder="10"></div>
+          </div>
+          <div class="input-number-div">
+            <label for="max-series-author-page">Maximum number of series on author pages</label>
+            <div class="input-wrapper"><input type="number" min=0 id="max-series-author-page" placeholder="10"></div>
+          </div>
+          <br/>
+          <hr/>
+          <br/>
+          <div class="subtitle-div">Customize your website's texts (leave blank to keep the default value)</div>
+          <div id="strings-div"></div>
+          <br/>
+          <hr/>
+          <br/>
+          <div class="subtitle-div">Advanced settings</div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="twig-inside-articles">
+            <label for="twig-inside-articles">Enable <a class="blue-link" target="_blank" href="https://twig.symfony.com/">Twig</a> in the text editor <span class="info-span" data-title="This will enable the easy insertion of&#010;references and images in your articles."><img src="images/info.svg"/></span></label><br/>
+            <input type="checkbox" id="remove-dot-html">
+            <label for="remove-dot-html">Remove ".html" from page URLs</label> <span class="info-span" data-title="This will change the links on your website&#010;and add some directives in the .htaccess file."><img src="images/info.svg"/></span><br/>
+            <input type="checkbox" id="share-button">
+            <label for="share-button">Add a share button to articles</label><br/>
+            <input type="checkbox" id="article-in-feedback">
+            <label for="article-in-feedback">Put the article ID in the feedback link</label><br/>
+            <input type="checkbox" id="rss-for-mainpage">
+            <label for="articles-in-author-profile">Display published articles in the authors' profiles</label><br/>
+            <input type="checkbox" id="articles-in-author-profile">
+            <label for="rss-for-mainpage">Generate RSS for the Main Page</label><br/>
+            <input type="checkbox" id="rss-for-sections">
+            <label for="rss-for-sections">Generate RSS for Section Pages</label><br/>
+          </div>
+          <br/><br/>
+          <span>View and edit the &nbsp;&nbsp;<a id="open-rss-modal" class="button" href="#">RSS templates</a></span>
+          <br/><br/>
+          <span>Download a copy of the database in JSON format &nbsp;&nbsp;<button id="download-json-db" class="button">Download</button></span><br/><br/>
+          <span>Grant permission to use persistent storage &nbsp;&nbsp;<button id="persistent-storage" class="button">Confirm</button></span><br/><br/>
+          <span>Reset the Default Theme <span class="info-span" data-title="After importing the website database,&#010;you may need to update the Default Theme."><img src="images/info.svg"/></span>&nbsp;&nbsp;<button id="reset-default-theme" class="button">Reset</button></span><br/><br/>
+          <br/>
+          <label for="img-url-prefix">URL prefix for images <span class="info-span" data-title="Storing images with an image hosting service&#010;can improve the performance of your website."><img src="images/info.svg"/></span></label>
+          <input type="url" id="img-url-prefix" pattern=".*[^\/]$" placeholder="https://example.com/images (no slash at the end)"><br/>
+          <label for="feedback-uri-prefix">URI prefix for feedback <span class="info-span" data-title="This link will be inserted in the feedback button."><img src="images/info.svg"/></span></label>
+          <input type="text" id="feedback-uri-prefix" placeholder="mailto:someone@example.com?subject= or https://forms.com?id=" autocorrect="off" autocapitalize="off" spellcheck="false"><br/>
+          <label for="number-authors-references">Max. number of authors to be displayed in references (blank for all)</label>
+          <input type="number" id="number-authors-references" min="2" placeholder="(blank)"><br/>
+          <label for="number-items-rss">Max. number of items in RSS files</label>
+          <input type="number" id="number-items-rss" min="1" placeholder="15"><br/>
+          <label for="head-code-snippets">Head code snippets (e.g. Analytics)</label>
+          <textarea id="head-code-snippets" rows="2" placeholder="<script>...</script> (Tip: use a privacy-friendly analytics solution)" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+          <label for="comment-box-snippet">Comment box snippet <span class="info-span" data-title="If you insert a code snippet here, you will see the option&#010;to 'Enable Comments' on the Edit Articles page."><img src="images/info.svg"/></span></label>
+          <textarea id="comment-box-snippet" rows="2" placeholder="<script>...</script> (Also use a privacy-focused solution here)" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+          <label for="footer-social-snippet">Footer social snippet (e.g. Subscription form)</label>
+          <textarea id="footer-social-snippet" rows="5" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+          <label for="htaccess">Server configuration (.htaccess)</label>
+          <textarea id="htaccess" rows="5" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+          <br/>
+          <hr/>
+          <br/>
+          <div class="subtitle-div">Extend the chosen theme with your own variables and JS functions</div>
+          <div id="user-variables-label">User variables <i>(inside Twig code: global.user.var_name)</i> <span class="info-span" data-title="Enter data in JSON format."><img src="images/info.svg"/></span></div>
+          <br/>
+          <div id="user-variables" aria-labelledby="user-variables-label">{}</div>
+          <br/>
+          <hr/>
+          <br/>
+          <div id="main-js-label">Main.js <i>(put here only what you couldn't do with CSS)</i> <span class="info-span" data-title="The modifications made to this Javascript&#010;code will not work in the preview area.&#010;They will only work once your website's&#010;static files have been generated."><img src="images/info.svg"/></span></div>
+          <br/>
+          <div id="main-js" aria-labelledby="main-js-label"></div>
+          <br/><br/>
+        </form>
+      </div>
+    </div>
+    <div id="rss-modal" class="modal">
+      <div class="modal-content">
+        <span id="close-rss-modal" class="close">&times;</span>
+        <div class="form-div">
+          <form id="rss-form" autocomplete="off">
+            <em id="mainpage-rss-label">Main Page RSS (XML + Twig)</em>
+            <div id="mainpage-rss" rows=5 aria-labelledby="mainpage-rss-label"></div>
+            <br/>
+            <em id="section-rss-label">Section Page RSS (XML + Twig)</em>
+            <div id="section-rss" rows=5 aria-labelledby="section-rss-label"></div>
+            <br/>
+            <input id="save" type="submit" value="Save">
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <script type="module" src="js/script.js"></script> 
+  </body>
+</html>

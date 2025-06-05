@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <title>LibreBlog - A tool for independent journalism</title> 
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  
+  <body>
+    <div id="horizontal-bar">
+      <div id="horizontal-bar-contents">
+        <div id="horizontal-bar-logo">
+          <a href="https://libreblog.org"><img src="images/logo.svg" alt="Logo" height="24px" /></a>
+        </div>
+        <div id="dropdown-menu">
+          <img id="dropdown-menu-icon" class="icon" src="images/menu.svg"/>
+          <ul id="dropdown-menu-list">
+            <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+            <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+            <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+            <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+            <li><a href="/relations.html"><img class="icon" src="images/relations.svg"/>Relations</a></li>
+            <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+            <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+            <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+            <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+            <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+            <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+            <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="vertical-navbar">
+      <ul>
+        <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+        <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+        <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+        <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+        <li><a href="/relations.html"><img class="icon" src="images/relations.svg"/>Relations</a></li>
+        <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+        <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+        <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+        <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+        <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+        <li class="active"><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a><div class="triangle"></div></li>
+        <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+      </ul>
+      <div id="logo-bottom">
+        <a href="https://libreblog.org" target="_blank"><img src="images/logo.svg" alt="Logo" width="110px" /></a>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="title-div">
+        <span>Choose a Template</span>
+        <select id="select-page-type"></select>
+      </div>
+      <div id="twig-variables-info" class="details-header">
+        <details class="extrainfo" id="documentation-for-templates">
+          <summary>Documentation for template designers</summary>
+          <div class="infocontent">
+            <code>
+              <div>Okay, this page is a bit different from the others. It is intended to be used by template designers. For most users, the recommended action is to choose a theme on the <a href="/appearance.html">Appearance</a> page without changing the templates. However, if you want to practice your web development skills, keep reading.<br/><br/>Below is a list of variables that you can insert into the templates so that some information is inserted programmatically, without you having to worry about it while you focus on the content of your website.<br/><br/>These variables must be inserted as follows: <i>{{ item.subitem }}</i>. For example, to place the name of the website somewhere on the page, simply insert <i>{{ global.website_name }}</i> in its HTML code.<br/><br/>For more advanced uses of the Twig syntax, read this <a href="https://twig.symfony.com/doc/3.x/templates.html" target="_blank">page</a>.<br/><br/>List of variables:<br/></div>
+              <h4>In the CSS section</h4>
+              <ul>
+                <li>global (object) [go to <a class="blue-link" href="/settings.html">Settings</a> to edit its attributes]
+                  <ul>
+                    <li>website_name (string)</li>
+                    <li>website_title (string)</li>
+                    <li>website_description (string)</li>
+                    <li>website_logo (string)</li>
+                    <li>website_url (string)</li>
+                    <li>website_favicon (string)</li>
+                    <li>website_language (string) ["en", "fr" ...]</li>
+                    <li>website_timezone (string) [... -01:00, +00:00, +01:00 ...)]</li>
+                    <li>timezone_abbreviation (string)</li>
+                    <li>dot_html_for_links (string) [".html" or "" if the user has decided to remove this file extension from URLs]</li>
+                    <li>share_button (boolean)</li>
+                    <li>article_in_feedback (boolean)</li>
+                    <li>articles_in_author_profile (boolean)</li>
+                    <li>feedback_uri_prefix (string)</li>
+                    <li>img_url_prefix (string)</li>
+                    <li>head_code_snippets (string) [HTML]</li>
+                    <li>comment_box_snippet (string) [HTML]</li>
+                    <li>footer_social_snippet (string) [HTML]</li>
+                    <li>user (object) [user-defined variables. Obs.: Edit them as a JSON object]</li>
+                    <li>strings (object) [strings for internationalization]</li>
+                    <ul>
+                      <li>[in the default_theme there are these strings: no_articles_found, in_section_label, series_label, timeline_label, header_search_placeholder, footer_social_header, footer_subscribe_text, footer_email_placeholder, footer_subscribe_button, previous_articles, initial_page, and next_articles]
+                      </li>
+                    </ul>
+                    <li>libreblog (object)
+                      <ul>
+                        <li>logo (string) [data:image/svg+xml...]</li>
+                        <li>version (string)</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <h4>In the HTML section</h4>
+              <h5>For all pages and components</h5>
+              <ul>
+                <li>global (object) [same as above]</li>
+                <li>media (object) [used in conjunction with the media_url function]
+                  <ul>[uri of media resource] (object):
+                    <li>url (string)</li>
+                    <li>uri (string)</li>
+                    <li>file_extension (string)</li>
+                    <li>size (string)</li>
+                    <li>alt_text (string)</li>
+                    <li>title (string)</li>
+                    <li>info (string)</li>
+                    <li>created (string)</li>
+                    <li>updated (string)</li>
+                    <li>type (string)</li>
+                    <li>download_mode (boolean)</li>
+                    <li>versions (string)</li>
+                  </ul>
+                </li>
+              </ul>
+              <h5>For all HTML templates except page components</h5>
+              <ul>
+                <li>components (object)
+                  <ul>
+                    <li>header (string) [HTML with the rendered template]</li>
+                    <li>footer (string) [HTML with the rendered template]</li>
+                    <li>[other component] (string) [HTML]</li>
+                  </ul>
+                </li>
+                <li>search_js_file (string) ["search-(random number).js"] [inside this JS file, a variable called libreblogSearch is set. It is accessible in the scope of the pages] 
+                  <ul>[contents of libreblogSearch (array)]:
+                    <ul>items:
+                      <li>uri (string) [link to the article or series page]</li>
+                      <li>type (string) ['Article', 'Series']</li>
+                      <li>title (string)</li>
+                      <li>subtitle (string)</li>
+                      <li>searchable (string) [title + ";" + subtitle, normalized and in lower case]</li>
+                      <li>in_sitemap (integer) [0=no and 1=yes]</li>
+                      <li>created (string)</li>
+                      <li>published (string)</li>
+                      <li>updated (string)</li>
+                      <li>photo (object)
+                        <ul>
+                          <li>url (string)</li>
+                          <li>uri (string)</li>
+                          <li>file_extension (string)</li>
+                          <li>size (string)</li>
+                          <li>alt_text (string)</li>
+                          <li>title (string)</li>
+                          <li>info (string)</li>
+                          <li>download_mode (boolean)</li>
+                          <li>versions (object)
+                            <ul>
+                              <li>small (boolean)</li>
+                              <li>medium (boolean)</li>
+                              <li>large (boolean)</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </ul>
+                </li>
+              </ul>
+              <h5>For the Header HTML, the Footer HTML and other page components</h5>
+              <ul>
+                <li>navbar (array)
+                  <ul>items:
+                    <li>uri (string)</li>
+                    <li>label (string)</li>
+                    <li>location (string) ['Header', 'Footer' or another page component]</li>
+                    <li>type (string) ['Section', 'Series', 'Article', 'Author', 'External', or 'Label']</li>
+                    <li>reference (string) [format: '/{type}/{uri}.html' or URL (if type=External)]</li>
+                    <li>created (string) [format: dd/MM/yyyy hh:mm]</li>
+                    <li>updated (string) [format: dd/MM/yyyy hh:mm]</li>
+                  </ul>
+                </li>
+              </ul>
+              <h5>For the Main Page</h5>
+              <ul>
+                <li>articles (array)
+                  <ul>items:
+                    <li>uri (string)</li>
+                    <li>type (string) ['Article', 'Page', or 'Analysis']</li>
+                    <li>highlight_mainpage (integer) [0=no and 1=yes]</li>
+                    <li>highlight_section (integer) [0=no and 1=yes]</li>
+                    <li>enable_comments (integer) [0=no and 1=yes]</li>
+                    <li>in_sitemap (integer) [0=no and 1=yes]</li>
+                    <li>title (string)</li>
+                    <li>subtitle (string)</li>
+                    <li>label (string)</li>
+                    <li>series_uri (string)</li>
+                    <li>section_uri (string)</li>
+                    <li>section_title (string)</li>
+                    <li>created (string) [format: dd/MM/yyyy hh:mm]</li>
+                    <li>updated (string) [format: dd/MM/yyyy hh:mm]</li>
+                    <li>authors_ids (string) [uris separated by ',']</li>
+                    <li>contents (string) [HTML]</li>
+                    <li>declared_values (object) [see the "declare" function]</li>
+                    <li>photo (object)
+                        <ul>
+                          <li>url (string)</li>
+                          <li>uri (string)</li>
+                          <li>file_extension (string)</li>
+                          <li>size (string)</li>
+                          <li>alt_text (string)</li>
+                          <li>title (string)</li>
+                          <li>info (string)</li>
+                          <li>download_mode (boolean)</li>
+                          <li>versions (object)
+                            <ul>
+                              <li>small (boolean)</li>
+                              <li>medium (boolean)</li>
+                              <li>large (boolean)</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    <li>photo_info (string)</li>
+                    <li>notes (string)</li>
+                    <li>status (string) ['Published' or 'Unpublished']</li>
+                  </ul>
+                </li>
+                <li>series (array)
+                  <ul>items:
+                    <li>uri (string)</li>
+                    <li>highlight_mainpage (integer) [0=no and 1=yes]</li>
+                    <li>highlight_section (integer) [0=no and 1=yes]</li>
+                    <li>hide_search_engines (integer) [0=no and 1=yes]</li>
+                    <li>title (string)</li>
+                    <li>subtitle (string)</li>
+                    <li>section_uri (string)</li>
+                    <li>section_title (string)</li>
+                    <li>created (string) [format: dd/MM/yyyy hh:mm]</li>
+                    <li>updated (string) [format: dd/MM/yyyy hh:mm]</li>
+                    <li>authors_ids (string) [uris separated by ',']</li>
+                    <li>contents (string) [HTML]</li>
+                    <li>photo (object) [as in articles]</li>
+                    <li>photo_info (string)</li>
+                    <li>declared_values (object) [see the "declare" function]</li>
+                    <li>status (string)</li>
+                  </ul>                  
+                </li>
+                <li>how_many_pages (number) [for pagination]</li>
+                <li>current_page (number) [for pagination]</li>
+              </ul>
+              <h5>For the Section Page</h5>
+              <ul>
+                <li>section (object)
+                  <ul>
+                    <li>uri (string)</li>
+                    <li>title (string)</li>
+                    <li>description (string)</li>
+                    <li>created (string) [format: dd/MM/yyyy hh:mm]</li>
+                    <li>updated (string) [format: dd/MM/yyyy hh:mm]</li>
+                    <li>authors_ids (string) [uris separated by ',']</li>
+                    <li>authors (array[object]) [as in Articles]</li>
+                    <li>contents (string) [HTML]</li>
+                    <li>declared_values (object) [see the "declare" function]</li>
+                  </ul> 
+                </li>
+                <li>articles (array) [as in the Main Page, but without the section_title]</li>
+                <li>series (array) [as in the Main Page, but without the section_title]</li>
+                <li>how_many_pages (number) [for pagination]</li>
+                <li>current_page (number) [for pagination]</li>
+              </ul>
+              <h5>For the Series Page</h5>
+              <ul>
+                <li>series (object) [the individual series]
+                  <ul>
+                    <li>uri (string)</li>
+                    <li>highlight_mainpage (integer) [0=no and 1=yes]</li>
+                    <li>highlight_section (integer) [0=no and 1=yes]</li>
+                    <li>in_sitemap (integer) [0=no and 1=yes]</li>
+                    <li>title (string)</li>
+                    <li>subtitle (string)</li>
+                    <li>section_uri (string)</li>
+                    <li>section_title (string)</li>
+                    <li>created (string) [format: dd/MM/yyyy hh:mm]</li>
+                    <li>updated (string) [format: dd/MM/yyyy hh:mm]</li>
+                    <li>published (string) [format: dd/MM/yyyy hh:mm]</li>
+                    <li>authors_ids (string) [uris separated by ',']</li>
+                    <li>authors (array[object]) [as in Articles]</li>
+                    <li>contents (string) [HTML]</li>
+                    <li>photo (object) [as in the Main Page]</li>
+                    <li>photo_info (string)</li>
+                    <li>declared_values (object) [see the "declare" function]</li>
+                    <li>status (string)</li>
+                  </ul> 
+                </li>
+                <li>articles (array) [as in the Main Page]</li>
+                <li>how_many_pages (number) [for pagination]</li>
+                <li>current_page (number) [for pagination]</li>
+                <li>section (object) [the section of this series or an empty object, if none]</li>                    
+              </ul>
+              <h5>For the Author Page</h5>
+              <ul>
+                <li>author (object)
+                  <ul>
+                    <li>uri (string)</li>
+                    <li>name (string)</li>
+                    <li>contact (string)</li>
+                    <li>location (string)</li>
+                    <li>created (string) [format: dd/MM/yyyy hh:mm]</li>
+                    <li>updated (string) [format: dd/MM/yyyy hh:mm]</li>
+                    <li>photo (object) [as in the Main Page]</li>
+                    <li>photo_info (string)</li>
+                    <li>declared_values (object) [see the "declare" function]</li>
+                    <li>contents (string) [HTML]</li>
+                  </ul> 
+                </li>
+                <li>articles (array) [as in the Main Page, but without the section_title]</li>
+                <li>series (array) [as in the Main Page, but without the section_title]</li>
+                <li>how_many_pages (number) [for pagination]</li>
+                <li>current_page (number) [for pagination]</li>
+                <li>declared_values (object) [as in Articles]</li>
+              </ul>
+              <h5>For all types of Article [Article, Page, Analysis (and custom types)]</h5>
+              <ul>
+                <li>article (object)
+                  <ul>
+                    <li>uri (string)</li>
+                    <li>type (string) ['Article', 'Page', etc.]</li>
+                    <li>highlight_mainpage (integer) [0=no and 1=yes]</li>
+                    <li>highlight_section (integer) [0=no and 1=yes]</li>
+                    <li>enable_comments (integer) [0=no and 1=yes]</li>
+                    <li>in_sitemap (integer) [0=no and 1=yes]</li>
+                    <li>title (string)</li>
+                    <li>subtitle (string)</li>
+                    <li>label (string)</li>
+                    <li>series_uri (string)</li>
+                    <li>section_uri (string)</li>
+                    <li>section_title (string)</li>
+                    <li>created (string) [format: dd/MM/yyyy hh:mm]</li>
+                    <li>updated (string) [format: dd/MM/yyyy hh:mm]</li>
+                    <li>published (string) [format: dd/MM/yyyy hh:mm]</li>
+                    <li>authors_ids (string) [uris separated by ',']</li>
+                    <li>authors (array) 
+                      <ul>items:
+                        <li>uri (string)</li>
+                        <li>type (string)</li>
+                        <li>name (string)</li>
+                        <li>email (string)</li>
+                        <li>bio (string)</li>
+                        <li>contact (string)</li>
+                        <li>location (string)</li>
+                        <li>photo (object) [as in the Main Page]</li>
+                        <li>contents (string) [HTML]</li>
+                      </ul>
+                    </li>
+                    <li>contents (string) [HTML]</li>
+                    <li>photo (object) [as in the Main Page]</li>
+                    <li>photo_info (string)</li>
+                    <li>notes (string)</li>
+                    <li>declared_values (object) [see the "declare" function]</li>
+                    <li>status (string) ['Published' or 'Unpublished']</li>
+                  </ul> 
+                </li>
+                <li>section (object) [the section of this article or an empty object, if none]</li>
+                <li>series (object) [the series of this article or an empty object, if none]</li>                                 
+                <li>relations (object)
+                  <ul>
+                    <li>first_articles (object)
+                      <ul>
+                        <li>[name of the relation] (array)
+                          <ul>items:
+                            <li> article (object) 
+                              <ul>
+                                <li> the same attributes as the Main Page, but without the section_title </li>
+                                <li> relation (object)
+                                  <ul>      
+                                    <li>uri (string)</li>
+                                    <li>article1 (string) [uri of an article]</li>
+                                    <li>article2 (string) [uri of an article]</li>
+                                    <li>type (string)</li>
+                                    <li>place (string) [a number or a date]</li>
+                                    <li>contents (string) [HTML]</li>
+                                    <li>created (string) [format: dd/MM/yyyy hh:mm]</li>
+                                    <li>updated (string) [format: dd/MM/yyyy hh:mm]</li>
+                                    <li>photo (object) [as in the Main Page]</li>
+                                    <li>photo_info (string)</li>
+                                    <li>authors_ids (string) [uris separated by ',']</li>
+                                    <li>declared_values (object) [see the "declare" function]</li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>second_articles (object) [similar to the item first_articles]</li>
+                  </ul>
+                </li>  
+              </ul>
+              <h4>Functions</h4>
+              <ul>
+                <li>r(refId: string, args: object): string [inserts a reference and returns a string with an HTML element with an anchor link] </li>
+                <li>img(imgId: string, args: object, options: object): string [returns a string with an IMG element. The possible attributes of <i>options</i> are: width (number), height (number), version (string), title (string/boolean), caption (string/boolean), alt (string/boolean) and style (string)] </li>
+                <li>media_url(mediaId: string, media: object): string [returns the URL corresponding to the media ID] </li>   
+                <li>photo_version(photo: object, version: string): string [returns the URL of the requested image version. If it does not exist, it returns the smallest version that is larger than the one requested] </li>   
+                <li>reference(articleUri: string, pos: number): string [returns the reference ID related to a given reference position]</li>
+                <li>references_length(articleUri: string): number [returns the number of references in an article]</li>
+                <li>get_authors(ref: object): array[string] [returns the authors in a reference object]</li>
+                <li>get_urls(ref: object): array[string] [returns the URLs (UR) in a reference object]</li>
+                <li>get_py(ref: object): string [returns the publication year in a reference object]</li>
+                <li>get_title(ref: object): string [returns the title in a reference object]</li>
+                <li>get_type(ref: object): string [returns the type of a reference object. For example: "Journal Article"]</li>
+                <li>get_tags(ref: object, tags: array): array[array] [it receives an array with the desired tags (note: this array may contain arrays with tags that function as synonyms. For example: [["VL", "VO", "T3"], "IS", "SP"]. If "VL" is found, the function will not search for the other tags within the internal array. The function returns an array with an array for each tag found. In this array, there are three elements (the tag itself, a label for the tag and the value found)]</li>
+                <li>reference_loc(articleUri: string, pos: number): string [returns "Ibid." if the previous reference is equal to the given reference, "Loc. cit." if there is another reference equal to the given reference but not immediately preceding it, and "" for the other cases]</li>
+                <li>declare(key: string, value: string, args: object): void [this function allows user-edited pages to pass information to templates]</li>
+                <li>format_date(dateStr: string, options: object): string [formats dates in a human-readable format]</li>
+                <li>iso_datetime(dateStr: string): string [formats dates according to the ISO 8601 standard]</li>
+              </ul>
+            </code>
+          </div>
+        </details>
+      </div>
+      <h4>CSS + <a class="blue-link" target="_blank" href="https://twig.symfony.com/">Twig</a></h4>
+      <div id="editor-css"></div>
+      <h4>HTML + <a class="blue-link" target="_blank" href="https://twig.symfony.com/">Twig</a></h4>
+      <div id="editor-html"></div>
+      <br/><br/>
+      <div class="form-div">
+        <form id="templates-form">
+          <div class="templates-submit-div">
+            <input id="save" type="submit" value="Save Templates">
+            <input id="export" type="submit" value="Export Theme">
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="js/script.js"></script>  
+  </body>
+</html>

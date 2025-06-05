@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <title>LibreBlog - A tool for independent journalism</title> 
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  
+  <body>
+    <div id="horizontal-bar">
+      <div id="horizontal-bar-contents">
+        <div id="horizontal-bar-logo">
+          <a href="https://libreblog.org"><img src="images/logo.svg" alt="Logo" height="24px" /></a>
+        </div>
+        <div id="dropdown-menu">
+          <img id="dropdown-menu-icon" class="icon" src="images/menu.svg"/>
+          <ul id="dropdown-menu-list">
+            <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+            <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+            <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+            <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+            <li><a href="/relations.html"><img class="icon" src="images/relations.svg"/>Relations</a></li>
+            <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+            <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+            <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+            <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+            <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+            <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+            <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="vertical-navbar">
+      <ul>
+        <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+        <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+        <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+        <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+        <li class="active"><a href="/relations.html"><img class="icon" src="images/relations.svg" />Relations</a><div class="triangle"></div></li>
+        <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+        <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+        <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+        <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+        <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+        <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+        <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+      </ul>
+      <div id="logo-bottom">
+        <a href="https://libreblog.org" target="_blank"><img src="images/logo.svg" alt="Logo" width="110px" /></a>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="row">
+        <div class="column60">
+          <div class="title-div">Edit Relation</div>
+          <div id="editor-toolbar">
+            <div id="disposable-toolbar" class="toolbar">
+              <button><img src="images/bold.svg"/></button>
+              <button><img src="images/italic.svg"/></button>
+              <button><img src="images/heading.svg"/></button>
+              <button><img src="images/undo.svg"/></button>
+              <button><img src="images/image.svg"/></button>
+              <button><img src="images/save.svg"/></button>
+            </div>
+          </div>
+          <div id="editor-container">
+            <div id="editor"></div>
+          </div>
+        </div>
+        <div class="column40">
+          <div class="title-div"><div id="properties-label">Relation Details</div></div>
+          <div class="form-div">
+            <form id="relation-form" autocomplete="off">
+              <input type="hidden" id="uri" />
+              <label for="article1">Article 1 <span class="required-field-label">(required)</span></label>
+              <select id="article1" required>
+                <option value="" selected disabled>Choose one</option>
+              </select>
+              <label for="relation-type">Type of relation <span class="required-field-label">(required)</span></label>
+              <select id="relation-type" required>
+                <option value="" selected disabled>Choose one</option>
+              </select>
+              <label for="article2">Article 2 <span class="required-field-label">(required)</span></label>
+              <select id="article2" required>
+                <option value="" selected disabled>Choose one</option>
+              </select>
+              <label for="place">Place <span class="required-field-label">(required)</span></label>
+              <input type="number" placeholder="This field depends on the type of relation chosen" id="place" required />
+              <details id="select-datetime-format-container">
+                <summary>Select datetime format</summary>
+                <select id="select-datetime-format">
+                  <option value="year">Year</option>
+                  <option value="year-month">Year and Month</option>
+                  <option value="year-month-day">Year, Month and Day</option>
+                  <option value="complete">Year, Month, Day, Hour and Minute</option>
+                </select>
+              </details>
+              <label for="title">Title <span class="info-span" data-title="If blank, the title in the&#010;Article 1 will be displayed." data-title-right><img src="images/info.svg"/></span></label>
+              <input type="text" id="title" placeholder="Title">
+              <label for="authors">Authors' IDs</label>
+              <a id="add-one-author" class="button" href="/author-edit.html">Add One</a>
+              <select multiple id="authors"></select>
+              <label for="photo">Picture <span class="info-span" data-title="If blank, the Picture in the&#010;Article 1 will be displayed." data-title-right><img src="images/info.svg"/></span><a id="add-photo" class="button">Pick one</a></label>
+              <input type="text" id="photo" placeholder="image-id.jpg or https://my.url/image.jpg" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <label for="photo-info">Picture info <span class="info-span" data-title="If blank, the 'Picture info' in&#010;the Article 1 will be displayed." data-title-right><img src="images/info.svg"/></span></label>
+              <input type="text" id="photo-info" placeholder="Description, attribution, license..." spellcheck="false">
+
+              <div id="updated-div"></div>
+              
+              <input id="save" type="submit" value="Save">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="media-modal" class="modal">
+      <div class="modal-content">
+        <span id="close-media-modal" class="close">&times;</span>
+        <div id="media-modal-title">
+          <span>Choose a file</span>
+          <input id="filename-filter" type="text" placeholder="Filter by file name..."/></div>
+        <div id="media-container">
+        </div>
+      </div>
+    </div>
+    
+    <script type="module" src="js/script.js"></script> 
+  </body>
+</html>

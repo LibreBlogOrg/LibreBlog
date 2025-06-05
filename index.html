@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <title>LibreBlog - A tool for independent journalism</title> 
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  
+  <body>
+    <div id="horizontal-bar">
+      <div id="horizontal-bar-contents">
+        <div id="horizontal-bar-logo">
+          <a href="https://libreblog.org"><img src="images/logo.svg" alt="Logo" height="24px" /></a>
+        </div>
+        <div id="dropdown-menu">
+          <img id="dropdown-menu-icon" class="icon" src="images/menu.svg"/>
+          <ul id="dropdown-menu-list">
+            <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+            <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+            <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+            <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+            <li><a href="/relations.html"><img class="icon" src="images/relations.svg"/>Relations</a></li>
+            <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+            <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+            <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+            <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+            <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+            <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+            <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="vertical-navbar">
+      <ul>
+        <li class="active"><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a><div class="triangle"></div></li>
+        <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+        <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+        <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+        <li><a href="/relations.html"><img class="icon" src="images/relations.svg" />Relations</a></li>
+        <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+        <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+        <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+        <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+        <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+        <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+        <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+      </ul>
+      <div id="logo-bottom">
+        <a href="https://libreblog.org" target="_blank"><img src="images/logo.svg" alt="Logo" width="110px" /></a>
+      </div>
+    </div>
+
+    <div id="content">
+      <div id="gw-loader" class="loader-container-wrapper">
+        <div class="loader-container">
+          <span>Wait...</span>
+          <span class="loader"></span>
+        </div>
+      </div>
+      <div class="form-div">
+        <form id="dashboard-form">
+          <div class="short-submit-div">
+            <div id="dashboard-table-div">
+              <span id="dashboard-table-header">Your static website in numbers</span>
+              <table id="dashboard-table">
+                <tbody>
+                  <tr><td id="articles-cell" class="data-cell"></td><td id="articles-label" class="label-cell">articles</td></tr>
+                  <tr><td id="series-cell" class="data-cell"></td><td id="series-label" class="label-cell">series</td></tr>
+                  <tr><td id="sections-cell" class="data-cell"></td><td id="sections-label" class="label-cell">sections</td></tr>
+                  <tr><td id="relations-cell" class="data-cell"></td><td id="relations-label" class="label-cell">relations</td></tr>
+                  <tr><td id="sources-cell" class="data-cell"></td><td id="sources-label" class="label-cell">sources</td></tr>
+                  <tr><td id="navbar-cell" class="data-cell"></td><td id="navbar-label" class="label-cell">navbar items</td></tr>
+                  <tr><td id="authors-cell" class="data-cell"></td><td id="authors-label" class="label-cell">authors</td></tr>
+                  <tr><td id="themes-cell" class="data-cell"></td><td id="themes-label" class="label-cell">themes</td></tr>
+                  <tr><td id="media-files-cell" class="data-cell"></td><td id="media-files-label" class="label-cell">media files</td></tr>                  
+                  <tr><td id="files-size-cell" class="data-cell"></td><td id="files-size-label" class="label-cell">MB of files</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <button id="dump-db" type="submit">Download database <img class="button-svg" height="16" src="images/download.svg"/></button>
+            <details class="extrainfo">
+              <summary>Important note</summary>
+              <div class="infocontent"><code>All data entered into this web app is saved in the browser and might be accidentally deleted if you decide to clear your browsing history. It might also be deleted if the browser decides it needs storage space. It is therefore recommended that you make frequent backups of your data.<br/><br/>You can ask the browser not to delete the data from this web app, even in the event of storage pressure, by going to <a href="/settings.html#persistent-storage">Settings</a>. However, this decision is up to each browser.</code></div>
+            </details>
+            <br/>
+            <input id="restore-db-input" type='file' id='load-db' hidden />
+            <button id="restore-db" type="submit">Restore database <img class="button-svg" height="16" src="images/upload.svg"/></button>
+            <details class="extrainfo">
+              <summary>Important note</summary>
+              <div class="infocontent"><code>The current data (including settings and changes to the templates) will be deleted and replaced with data from the imported database.</code></div>
+            </details>
+            <br/>
+            <button id="generate-website" type="submit">Generate website <img class="button-svg" height="18" src="images/zip.svg"/></button>
+            <details class="extrainfo">
+              <summary>Important note</summary>
+              <div class="infocontent"><code>This command will generate a ZIP file with the files needed to display the website (except for external resources). Extract this data and save it to your preferred hosting provider.</code></div>
+            </details>
+            <br/>
+            <button id="preview-website" type="submit">Preview website <img class="button-svg" height="18" src="images/preview-website.svg"/></button>
+            <details class="extrainfo">
+              <summary>Important note</summary>
+              <div class="infocontent"><code>There are some restrictions on what can be loaded into this preview area. These restrictions help prevent scripts from third-party websites from messing up with your data.<br/><br/>That is why, for example, if you try to insert a YouTube video into an article, instead of seeing the video you will see a gray box.</code></div>
+            </details>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="js/script.js"></script> 
+  </body>
+</html>

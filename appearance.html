@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <title>LibreBlog - A tool for independent journalism</title> 
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  
+  <body>
+    <div id="horizontal-bar">
+      <div id="horizontal-bar-contents">
+        <div id="horizontal-bar-logo">
+          <a href="https://libreblog.org"><img src="images/logo.svg" alt="Logo" height="24px" /></a>
+        </div>
+        <div id="dropdown-menu">
+          <img id="dropdown-menu-icon" class="icon" src="images/menu.svg"/>
+          <ul id="dropdown-menu-list">
+            <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+            <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+            <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+            <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+            <li><a href="/relations.html"><img class="icon" src="images/relations.svg"/>Relations</a></li>
+            <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+            <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+            <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+            <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+            <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+            <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+            <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="vertical-navbar">
+      <ul>
+        <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+        <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+        <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+        <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+        <li><a href="/relations.html"><img class="icon" src="images/relations.svg" />Relations</a></li>
+        <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+        <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+        <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+        <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+        <li class="active"><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a><div class="triangle"></div></li>
+        <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+        <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+      </ul>
+      <div id="logo-bottom">
+        <a href="https://libreblog.org" target="_blank"><img src="images/logo.svg" alt="Logo" width="110px" /></a>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="title-div">
+        <span>Customize Appearance</span>  
+      </div>
+      <div id="appearance-details-wrapper">
+        <div class="details-header">
+          <details class="extrainfo">
+            <summary>Support notes</summary>
+            <div class="infocontent"><code>On this page you can customize some of the features of your website. For more advanced customization, go to <a href="/templates.html">Templates</a>.<br/><br/>After editing the templates, you can save the customized theme to a file by clicking on <i>"Export theme"</i>. Exported themes can be imported by clicking on the <i>"Import from file"</i> button (on this page).</code></div>
+          </details>
+        </div>
+      </div>
+      <div class="form-div">
+        <form id="appearance-form" autocomplete="off">
+          <div class="subtitle-div">Colors</div>
+          <div id="colors-div"></div>
+        </form>
+      </div>
+      <br/><br/>
+      <div class="title-div">
+        <span>Use a Theme</span>
+        <input id="import-theme-input" type="file" hidden />
+        <button class="button" id="import-theme-button">Import from file</button>
+      </div>
+      <div id="themes"></div>
+    </div>
+
+    <script type="module" src="js/script.js"></script> 
+  </body>
+</html>

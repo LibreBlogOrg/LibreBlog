@@ -1,0 +1,30 @@
+{
+  "name": "LibreBlog",
+  "version": "1.0.0",
+  "description": "An in-browser Static Site Generator focused on content-rich blogs and news websites",
+  "manifest_version": 3,
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'"
+	},
+  "cross_origin_embedder_policy": {
+    "value": "credentialless"
+  },
+  "cross_origin_opener_policy": {
+    "value": "same-origin"
+  },
+  "permissions": [
+    "offscreen",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "action":{
+    "default_title": "LibreBlog"
+  },
+  "background": {
+    "service_worker": "js/background.js",
+    "type": "module"
+  },
+  "icons": {
+    "128": "images/favicon.png"
+  }
+}

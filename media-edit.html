@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <title>LibreBlog - A tool for independent journalism</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  
+  <body>
+    <div id="horizontal-bar">
+      <div id="horizontal-bar-contents">
+        <div id="horizontal-bar-logo">
+          <a href="https://libreblog.org"><img src="images/logo.svg" alt="Logo" height="24px" /></a>
+        </div>
+        <div id="dropdown-menu">
+          <img id="dropdown-menu-icon" class="icon" src="images/menu.svg"/>
+          <ul id="dropdown-menu-list">
+            <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+            <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+            <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+            <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+            <li><a href="/relations.html"><img class="icon" src="images/relations.svg"/>Relations</a></li>
+            <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+            <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+            <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+            <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+            <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+            <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+            <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="vertical-navbar">
+      <ul>
+        <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+        <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+        <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+        <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+        <li><a href="/relations.html"><img class="icon" src="images/relations.svg" />Relations</a></li>
+        <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+        <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+        <li class="active"><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a><div class="triangle"></div></li>
+        <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+        <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+        <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+        <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+      </ul>
+      <div id="logo-bottom">
+        <a href="https://libreblog.org" target="_blank"><img src="images/logo.svg" alt="Logo" width="110px" /></a>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="row">
+        <div class="column60">
+          <div class="title-div">Create or Edit a Media Resource</div>
+          <div id="drop-zone">
+            <div id="selected-media-file"></div>
+            <div id="drop-zone-text-wrapper">
+              <div id="drop-zone-text">Drag and drop a file here or&nbsp;&nbsp;</div>
+              <div id="media-file-btn-wrapper"><a id="media-file-btn" type="file" class="slim-button">Select a file</a></div>
+              <input type="file" id="select-media-file" hidden/>
+              <div id="convert-btn-wrapper"></div>
+            </div>
+          </div>
+          <canvas id="canvas"></canvas>
+        </div>
+        <div class="column40">
+          <div class="title-div"><div id="properties-label">Properties</div></div>
+          <div class="form-div">
+            <form id="media-form" autocomplete="off">
+              <label for="uri">ID <span class="required-field-label">(required)</span></label>
+              <input type="text" id="uri" placeholder="my-image1.jpg (the ID will also be the name of the file)" pattern="^[a-z0-9\-]+\.[a-z0-9]+$" title="Lowercase letters, numbers, hyphens and one dot only. The file extension cannot be changed." autocorrect="off" autocapitalize="off" spellcheck="false" required>
+              <label for="alt-text">Alt text <span class="info-span" data-title="Text displayed when an&#010;image is not available." data-title-right><img src="images/info.svg"/></span></label>
+              <input type="text" id="alt-text" placeholder="Short description">
+              <label for="title">Title/Tooltip <span class="info-span" data-title="Text displayed when the mouse&#010;moves over the media element." data-title-right><img src="images/info.svg"/></span></label>
+              <input type="text" id="title" placeholder="Short description">
+              <label for="info">Media info  <span class="info-span" data-title="Caption placed below&#010;the media element." data-title-right><img src="images/info.svg"/></span></label>
+              <input type="text" id="info" placeholder="Description, attribution, license..." spellcheck="false">
+              <label for="versions">Add versions <span class="info-span" data-title="This feature allows you to&#010;reduce bandwidth usage.&#010;Supported formats:&#010;JPEG, WebP and PNG" data-title-right><img src="images/info.svg"/></span></label>
+              <select multiple id="versions">
+                <option value="small">Small (400px in width)</option>
+                <option value="medium">Medium (800px in width)</option>
+                <option value="large">Large (1200px in width)</option>
+              </select>
+              <!-- Hidden -->
+              <input type="hidden" id="type" value="image" placeholder="Not yet implemented">
+              <input type="hidden" id="file-extension" required>
+              <input type="hidden" id="size" value="0">
+              <!-- end -->
+
+              <div id="updated-div"></div>
+
+              <input id="save" type="submit" value="Save">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/script.js"></script> 
+  </body>
+</html>

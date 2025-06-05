@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <title>LibreBlog - A tool for independent journalism</title> 
+    <link rel="stylesheet" href="css/style.css"> 
+  </head>
+  
+  <body>
+    <div id="horizontal-bar">
+      <div id="horizontal-bar-contents">
+        <div id="horizontal-bar-logo">
+          <a href="https://libreblog.org"><img src="images/logo.svg" alt="Logo" height="24px" /></a>
+        </div>
+        <div id="dropdown-menu">
+          <img id="dropdown-menu-icon" class="icon" src="images/menu.svg"/>
+          <ul id="dropdown-menu-list">
+            <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+            <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+            <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+            <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+            <li><a href="/relations.html"><img class="icon" src="images/relations.svg"/>Relations</a></li>
+            <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+            <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+            <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+            <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+            <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+            <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+            <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="vertical-navbar">
+      <ul>
+        <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+        <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+        <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+        <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+        <li><a href="/relations.html"><img class="icon" src="images/relations.svg" />Relations</a></li>
+        <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+        <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+        <li class="active"><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a><div class="triangle"></div></li>
+        <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+        <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+        <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+        <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+      </ul>
+      <div id="logo-bottom">
+        <a href="https://libreblog.org" target="_blank"><img src="images/logo.svg" alt="Logo" width="110px" /></a>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="title-div">
+        <span>Media</span> 
+        <a class="button" href="/media-edit.html">Add Media Resource</a>
+        <input id="import-media-files-input" type="file" hidden multiple />
+        <span id="insert-media-files-btn" class="button">Bulk Insert</span>
+      </div>
+      <div class="details-header">
+        <details class="extrainfo">
+          <summary>Support notes</summary>
+          <div class="infocontent"><code>If you wish to import media files in bulk, you should pay attention to their file names, as they can only contain lowercase letters, numbers, hyphens and one dot. In addition, at the moment only the following types of image files can be imported into this library: JPEG, PNG, APNG, GIF, SVG, ICO, WEBP and AVIF.<br/><br/>Note: If the records concerning the imported files already exist in this table, the file will be updated to the new version and the metadata already stored will be kept.</code></div>
+        </details>
+      </div>
+      <div id="actions-div">
+        <form id="action-form">
+          <div id="select-action-div">
+            <select id="select-action"> 
+              <option value="none">Bulk actions</option>
+              <option value="delete">Delete</option>
+            </select>
+            <input id="action-form-button" type="submit" class="button" form="action-form" value="Apply" >
+          </div>
+          <div id="select-filter-div">
+            <select id="select-filter"> 
+              <option value="none">Filter by...</option>
+            </select>
+            <input id="filter" type="text" />
+          </div>
+        </form>
+      </div>
+      <table id="media-table" class="data-table">
+        <thead>
+          <tr>
+            <th><div>&nbsp;</div></th>
+            <th><div>&nbsp;</div></th>
+            <th><div>&nbsp;</div></th>
+            <th><div>&nbsp;</div></th>
+            <th><div>&nbsp;</div></th>
+            <th><div>&nbsp;</div></th>
+            <th><div>&nbsp;</div></th>
+            <th><div>&nbsp;</div></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div>&nbsp;</div></td>
+            <td><div>&nbsp;</div></td>
+            <td><div>&nbsp;</div></td>
+            <td><div>&nbsp;</div></td>
+            <td><div>&nbsp;</div></td>
+            <td><div>&nbsp;</div></td>
+            <td><div>&nbsp;</div></td>
+            <td><div>&nbsp;</div></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4" id="tfoot-left-td">Showing <span id="data-table-from">0</span> to <span id="data-table-to">0</span> of <span id="data-table-of">0</span> <span id="entries-label-span">entries</span></td>
+            <td colspan="4" id="tfoot-right-td">
+              <span id="data-pagination-span"><span id="go-to-first-page">&nbsp;«&nbsp;</span><span id="go-to-previous-page">&nbsp;‹&nbsp;</span><span id="current-page-span">&nbsp;<input type="number" id="current-page" min="1" />&nbsp;</span><span id="go-to-next-page">&nbsp;›&nbsp;</span><span id="go-to-last-page">&nbsp;»&nbsp;</span></span>
+              <span id="entries-per-page-span">Entries/page <select id="entries-per-page"><option value="10">10</option><option value="20">20</option><option value="50">50</option><option value="100">100</option></select></span>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <canvas id="canvas"></canvas>
+    
+    <script type="module" src="js/script.js"></script> 
+  </body>
+</html>

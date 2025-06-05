@@ -1,0 +1,36 @@
+{
+  "name": "libreblog",
+  "version": "1.0.0",
+  "description": "An in-browser Static Site Generator focused on content-rich blogs and news websites",
+  "main": "libreblog/libreblog.js",
+  "type": "module",
+  "scripts": {
+    "postinstall": "node js/postinstall.js"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.4.1",
+    "ace-builds": "^1.41.0",
+    "jszip": "^3.10.1"
+  },
+  "dependencies": {
+    "@sqlite.org/sqlite-wasm": "^3.49.2-build1",
+    "twig": "^1.17.1",
+    "marked": "^15.0.12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LibreBlogOrg/LibreBlog.git"
+  },
+  "keywords": [
+    "static-site-generator",
+    "in-browser",
+    "twigjs",
+    "blog"
+  ],
+  "author": "Thiago Gomes Quinalia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LibreBlogOrg/LibreBlog/issues"
+  },
+  "homepage": "https://github.com/LibreBlogOrg/LibreBlog#readme"
+}

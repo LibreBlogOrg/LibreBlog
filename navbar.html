@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <title>LibreBlog - A tool for independent journalism</title> 
+    <link rel="stylesheet" href="css/style.css"> 
+  </head>
+  
+  <body>
+    <div id="horizontal-bar">
+      <div id="horizontal-bar-contents">
+        <div id="horizontal-bar-logo">
+          <a href="https://libreblog.org"><img src="images/logo.svg" alt="Logo" height="24px" /></a>
+        </div>
+        <div id="dropdown-menu">
+          <img id="dropdown-menu-icon" class="icon" src="images/menu.svg"/>
+          <ul id="dropdown-menu-list">
+            <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+            <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+            <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+            <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+            <li><a href="/relations.html"><img class="icon" src="images/relations.svg"/>Relations</a></li>
+            <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+            <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+            <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+            <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+            <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+            <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+            <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="vertical-navbar">
+      <ul>
+        <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+        <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+        <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+        <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+        <li><a href="/relations.html"><img class="icon" src="images/relations.svg" />Relations</a></li>
+        <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+        <li class="active"><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a><div class="triangle"></div></li>
+        <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+        <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+        <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+        <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+        <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+      </ul>
+      <div id="logo-bottom">
+        <a href="https://libreblog.org" target="_blank"><img src="images/logo.svg" alt="Logo" width="110px" /></a>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="title-div">
+        <span>Navigation</span> 
+        <a id="open-navbar-modal" class="button">Add Navbar Item</a>
+      </div>
+      <div class="details-header">
+        <details class="extrainfo">
+          <summary>Support notes</summary>
+          <div class="infocontent"><code>Add links to the header or footer of your website. You can create links to internal elements (sections, series, authors or articles) or you can insert an external link.<br/><br/><i>P.S. 1</i>: There cannot be more than one item with the same <i>Position</i> in the same page component.<br/><br/><i>P.S. 2</i>: There is a special type of navbar item called a label. It does not refer to any page, it is just used to subdivide your list of links into sections.</code></div>
+        </details>
+      </div>
+      <div id="actions-div">
+        <form id="action-form">
+          <div id="select-action-div">
+            <select id="select-action"> 
+              <option value="none">Bulk actions</option>
+              <option value="delete">Delete</option>
+            </select>
+            <input id="action-form-button" type="submit" class="button" form="action-form" value="Apply" >
+          </div>
+          <div id="select-filter-div">
+            <select id="select-filter"> 
+              <option value="none">Filter by...</option>
+            </select>
+            <input id="filter" type="text" />
+          </div>
+        </form>
+      </div>
+      <table id="navbar-table" class="data-table">
+        <thead>
+          <tr>
+            <th><div>&nbsp;</div></th>
+            <th><div>&nbsp;</div></th>
+            <th><div>&nbsp;</div></th>
+            <th><div>&nbsp;</div></th>
+            <th><div>&nbsp;</div></th>
+            <th><div>&nbsp;</div></th>
+            <th><div>&nbsp;</div></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div>&nbsp;</div></td>
+            <td><div>&nbsp;</div></td>
+            <td><div>&nbsp;</div></td>
+            <td><div>&nbsp;</div></td>
+            <td><div>&nbsp;</div></td>
+            <td><div>&nbsp;</div></td>
+            <td><div>&nbsp;</div></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4" id="tfoot-left-td">Showing <span id="data-table-from">0</span> to <span id="data-table-to">0</span> of <span id="data-table-of">0</span> <span id="entries-label-span">entries</span></td>
+            <td colspan="4" id="tfoot-right-td">
+              <span id="data-pagination-span"><span id="go-to-first-page">&nbsp;«&nbsp;</span><span id="go-to-previous-page">&nbsp;‹&nbsp;</span><span id="current-page-span">&nbsp;<input type="number" id="current-page" min="1" />&nbsp;</span><span id="go-to-next-page">&nbsp;›&nbsp;</span><span id="go-to-last-page">&nbsp;»&nbsp;</span></span>
+              <span id="entries-per-page-span">Entries/page <select id="entries-per-page"><option value="10">10</option><option value="20">20</option><option value="50">50</option><option value="100">100</option></select></span>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div id="navbar-modal" class="modal">
+      <div class="modal-content">
+        <span id="close-navbar-modal" class="close">&times;</span>
+        <div class="form-div">
+          <form id="navbar-form" autocomplete="off">
+            <input type="hidden" id="uri" />
+            <label for="position">Position <span class="required-field-label">(required)</span></label>
+            <input type="number" id="position" placeholder="Position in the page component" min=1 max=20 required>
+            <label for="label">Label <span class="required-field-label">(required)</span></label>
+            <input type="text" id="label" placeholder="Label to be displayed" required>
+            <label for="location">Location <span class="required-field-label">(required)</span></label>
+            <select id="location" required>
+              <option value="" selected disabled>Choose one</option>
+            </select>
+            <label for="reference-type">Type of reference <span class="required-field-label">(required)</span></label>
+            <select id="reference-type" required>
+              <option value="" selected disabled>Choose one</option>
+              <option name="section" value="section">Section</option>
+              <option name="series" value="series">Series</option>
+              <option name="article" value="article">Article</option>
+              <option name="author" value="author">Author</option>
+              <option name="external" value="external">External</option>
+              <option name="label" value="label">Label</option>
+            </select>
+            <label for="reference">Reference <span id="reference-required-label" class="required-field-label">(required)</span></label>
+            <input type="text" id="reference" list="reference-list" placeholder="" pattern="^[a-z0-9\-]+$" required>
+            <datalist id="reference-list"></datalist>
+
+            <input id="save" type="submit" value="Save">
+          </form>
+        </div>
+      </div>
+    </div>    
+    
+    <script type="module" src="js/script.js"></script> 
+  </body>
+</html>

@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <title>LibreBlog - A tool for independent journalism</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  
+  <body>
+    <div id="horizontal-bar">
+      <div id="horizontal-bar-contents">
+        <div id="horizontal-bar-logo">
+          <a href="https://libreblog.org"><img src="images/logo.svg" alt="Logo" height="24px" /></a>
+        </div>
+        <div id="dropdown-menu">
+          <img id="dropdown-menu-icon" class="icon" src="images/menu.svg"/>
+          <ul id="dropdown-menu-list">
+            <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+            <li><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a></li>
+            <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+            <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+            <li><a href="/relations.html"><img class="icon" src="images/relations.svg"/>Relations</a></li>
+            <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+            <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+            <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+            <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+            <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+            <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+            <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="vertical-navbar">
+      <ul>
+        <li><a href="/index.html"><img class="icon" src="images/dashboard.svg"/>Dashboard</a></li>
+        <li class="active"><a href="/articles.html"><img class="icon" src="images/articles.svg"/>Articles</a><div class="triangle"></div></li>
+        <li><a href="/series.html"><img class="icon" src="images/series.svg"/>Series</a></li>
+        <li><a href="/sections.html"><img class="icon" src="images/sections.svg"/>Sections</a></li>
+        <li><a href="/relations.html"><img class="icon" src="images/relations.svg" />Relations</a></li>
+        <li><a href="/sources.html"><img class="icon" src="images/sources.svg"/>Sources</a></li>
+        <li><a href="/navbar.html"><img class="icon" src="images/navbar.svg"/>Navigation</a></li>
+        <li><a href="/media.html"><img class="icon" src="images/media.svg"/>Media</a></li>
+        <li><a href="/authors.html"><img class="icon" src="images/authors.svg"/>Authors</a></li>
+        <li><a href="/appearance.html"><img class="icon" src="images/appearance.svg"/>Appearance</a></li>
+        <li><a href="/templates.html"><img class="icon" src="images/templates.svg"/>Templates</a></li>
+        <li><a href="/settings.html"><img class="icon" src="images/settings.svg"/>Settings</a></li>
+      </ul>
+      <div id="logo-bottom">
+        <a href="https://libreblog.org" target="_blank"><img src="images/logo.svg" alt="Logo" width="110px" /></a>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="row">
+        <div class="column60">
+          <div class="title-div">Edit Article</div>
+          <div id="editor-toolbar">
+            <div id="disposable-toolbar" class="toolbar">
+              <button><img src="images/bold.svg"/></button>
+              <button><img src="images/italic.svg"/></button>
+              <button><img src="images/heading.svg"/></button>
+              <button><img src="images/undo.svg"/></button>
+              <button><img src="images/image.svg"/></button>
+              <button><img src="images/reference.svg"/></button>
+              <button><img src="images/save.svg"/></button>
+            </div>
+          </div>
+          <div id="editor-container">
+            <div id="editor"></div>
+          </div>
+          <br/>
+          <details class="extrainfo">
+            <summary>Shortcuts and tips</summary>
+            <div class="infocontent">
+              <code> <b>Ctrl-S</b> (or Cmd-S): To save the article. <br/> <b>Ctrl-R</b> (or Cmd-R): To add references to the text. <br/> For more shortcuts <a href="https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts" target="_blank">click here</a>.<br/> For more information on the Markdown markup language, visit this <a href='https://www.markdownguide.org/basic-syntax/'  target="_blank">Markdown Guide</a>.<br/><br/><i>Note 1</i>: You can insert an image from your media library into the body of the article with an expression like this: <b>{{ img('image-id.jpg', a, {width: 725, height: 400, title: true, caption: true, style: 'float: right', version: 'small'}) }}</b>. Remark: You can enter a <i>string</i> in the <i>title/caption</i> attribute if you want to use a text other than the one defined in the image record. For example: <b>{{ img('image-id.jpg', {title: 'My tooltip'}, a) }}</b>.<br/><br/><i>Note 2</i>: You can use the <i>declare</i> function within the Twig code to change some template settings without having to change it for all the other articles. For example, <b>{{ declare('timeline-label', 'Events', a) }}</b> changes the label of the list of events displayed on the <i>Analysis</i> page, which now displays the text "Events" instead of "Timeline". To change the label of the "Key elements", type <b>{{ declare('key-elements-label', 'New text', a) }}</b>. For the "Related Analyses" label, type <b>{{ declare('related-analyses-label', 'New text', a) }}</b>.<br/><br/><i>Note 3</i>: To insert a code snippet into the head of the article, use <b>{{ declare("head-snippet", "&lt;script&gt;...&lt;/script&gt;", a) }}</b>. In the body, use <b>{{ declare("body-snippet", "&lt;script&gt;...&lt;/script&gt;", a) }}</b>. You can insert these codes (from notes 2 and 3) anywhere in your text, as they will not be displayed on the page. 
+              </code></div>
+          </details>
+        </div>
+        <div class="column40">
+          <div class="title-div">
+            <div id="properties-label">Article Details</div>
+          </div>
+          <div class="form-div">
+            <form id="article-form" autocomplete="off">
+              <label for="uri">ID <span class="required-field-label">(required)</span></label>
+              <input type="text" id="uri" placeholder="my-article-1" pattern="^[a-z0-9\-]+$" title="Lowercase letters, numbers and hyphens only" autocorrect="off" autocapitalize="off" spellcheck="false" required>
+              <label for="title">Title <span class="required-field-label">(required)</span></label>
+              <input type="text" id="title" placeholder="Title" required>
+              <label for="subtitle">Subtitle <span class="required-field-label">(recommended)</span></label>
+              <input type="text" id="subtitle" placeholder="Subtitle">
+              <label id="type-label" for="type">Type of article <span class="required-field-label">(required)</span></label>
+              <select id="type" required>
+                <option value="" selected disabled>Choose one</option>
+              </select>
+              <label for="label">Label</label>
+              <input type="text" id="label" placeholder="Ex.: Opinion, Review, Press release...">
+              <label for="section-uri">Section ID</label>
+              <a id="create-one-section" class="button" href="/section-edit.html">Create One</a>
+              <select id="section-uri">
+                <option value="">None</option>
+              </select>
+              <label for="series-uri">Series ID</label>
+              <a id="create-one-series" class="button" href="/series-edit.html">Create One</a>
+              <select id="series-uri">
+                <option value="">None</option>
+              </select>              
+              <br/>
+              <br/>
+              <input type="checkbox" id="highlight-mainpage" value="mainpage" checked=true >
+              <label for="highlight-mainpage">Featured on the main page?</label><br/>
+              <input type="checkbox" id="highlight-section" value="section">
+              <label for="highlight-section">Featured on the section page?</label><br/>
+              <input type="checkbox" id="in-sitemap" value="sitemap" checked=true>
+              <label for="in-sitemap">Listed in the sitemap? <span class="info-span" data-title="And also in&#010;search results." data-title-right><img src="images/info.svg"/></span></label><br/>
+              <input type="checkbox" id="enable-comments" value="comments">
+              <label id="enable-comments-label" for="enable-comments">Enable comments?</label><br/>
+              <br/>
+              <label for="authors">Authors' IDs</label>
+              <a id="add-one-author" class="button" href="/author-edit.html">Add One</a>
+              <select multiple id="authors"></select>
+              <label for="photo">Picture<a id="add-photo" class="button">Pick one</a></label>
+              <input type="text" id="photo" placeholder="image-id.jpg or https://my.url/image.jpg" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <label for="photo-info">Picture info</label>
+              <input type="text" id="photo-info" placeholder="Description, attribution, license..." spellcheck="false">
+              <label for="summary">Summary</label>
+              <textarea type="text" id="summary" placeholder="Summary (markdown format supported)" rows=2 spellcheck="false"></textarea>
+              <label for="notes">Notes</label>
+              <textarea type="text" id="notes" placeholder="Disclaimer, errata... (markdown format supported)" rows=2 spellcheck="false"></textarea>
+              <label for="editorial-notes">Editorial Notes</label>
+              <textarea type="text" id="editorial-notes" placeholder="They will not be displayed on the website" rows=2></textarea>
+              <label for="published">Published on <span class="info-span" data-title="If not provided, the date it&#010;was created will be used." data-title-right><img src="images/info.svg"/></span></label>
+              <input id="published" type="datetime-local">
+              <label for="status">Status</label>
+              <select id="status">
+                <option name="published" value="Published">Published</option>
+                <option name="unpublished" value="Unpublished">Unpublished</option>
+              </select>
+              <!-- Not yet implemented -->
+              <input type="hidden" id="geolocation" placeholder="Not yet implemented">
+              <input type="hidden" id="keywords" placeholder="Not yet implemented">
+              <input type="hidden" id="language" placeholder="Not yet implemented">
+              <input type="hidden" id="video" placeholder="Not yet implemented">
+              <input type="hidden" id="video-info" placeholder="Not yet implemented">
+              <input type="hidden" id="audio" placeholder="Not yet implemented">
+              <input type="hidden" id="audio-info" placeholder="Not yet implemented">
+              <!-- end -->
+
+              <div id="updated-div"></div>
+              
+              <input id="save" type="submit" value="Save">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="preview-modal" class="modal">
+      <div class="modal-content">
+        <span id="close-preview-modal" class="close">&times;</span>
+        <div id="preview-container">
+          <div id="gw-loader" class="loader-container-wrapper">
+            <div class="loader-container">
+              <span>Wait...</span>
+              <span class="loader"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="media-modal" class="modal">
+      <div class="modal-content">
+        <span id="close-media-modal" class="close">&times;</span>
+        <div id="media-modal-title">
+          <span>Choose a file</span>
+          <input id="filename-filter" type="text" placeholder="Filter by file name..."/></div>
+        <div id="media-container">
+        </div>
+      </div>
+    </div>
+
+    <div id="references-modal" class="modal">
+      <div class="modal-content">
+        <span id="close-references-modal" class="close">&times;</span>
+        <form id="references-modal-form" autocomplete="off">
+          <input id="submit-references" type="submit" value="Insert" />
+          <select id="select-filter"> 
+            <option value="none">Filter by...</option>
+          </select>
+          <input id="filter" type="text" placeholder="Filter..." />
+        </form>
+        <div id="mrt-wrapper1">
+          <div id="mrt-wrapper2">
+            <table id="modal-references-table" class="data-table">
+              <thead>
+                <tr>
+                  <th><div>&nbsp;</div></th>
+                  <th><div>&nbsp;</div></th>
+                  <th><div>&nbsp;</div></th>
+                  <th><div>&nbsp;</div></th>
+                  <th><div>&nbsp;</div></th>
+                  <th><div>&nbsp;</div></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div>&nbsp;</div></td>
+                  <td><div>&nbsp;</div></td>
+                  <td><div>&nbsp;</div></td>
+                  <td><div>&nbsp;</div></td>
+                  <td><div>&nbsp;</div></td>
+                  <td><div>&nbsp;</div></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3" id="tfoot-left-td">Showing <span id="data-table-from">0</span> to <span id="data-table-to">0</span> of <span id="data-table-of">0</span> <span id="entries-label-span">entries</span></td>
+                  <td colspan="3" id="tfoot-right-td">
+                    <span id="data-pagination-span"><span id="go-to-first-page">&nbsp;«&nbsp;</span><span id="go-to-previous-page">&nbsp;‹&nbsp;</span><span id="current-page-span">&nbsp;<input type="number" id="current-page" min="1" />&nbsp;</span><span id="go-to-next-page">&nbsp;›&nbsp;</span><span id="go-to-last-page">&nbsp;»&nbsp;</span></span>
+                    <span id="entries-per-page-span">Entries/page <select id="entries-per-page"><option value="10">10</option><option value="20">20</option><option value="50">50</option><option value="100">100</option></select></span>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <br/><br/>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/script.js"></script> 
+  </body>
+</html>
