@@ -1935,13 +1935,20 @@ Options -Indexes
         if (clickCameFromA(event.srcElement)) {
           event.preventDefault();
           let href = event.srcElement.attributes['href'];
-          if (!href) href = event.srcElement.parentElement.attributes['href'];
-  
-          let hrefValue = href.value + (globalThis.lb.dotHtmlForLinks() ? "" : ".html");
-          if (hrefValue.startsWith(globalThis.lb.globalVariables()['website_url'])) {
-            hrefValue = hrefValue.replace(globalThis.lb.globalVariables()['website_url'], "");
+          if (!href) href = event.srcElement.parentElement.attributes['href']; 
+          let hrefValue = href.value;
+          
+          if (hrefValue === globalThis.lb.globalVariables()['website_url']) {
+            hrefValue = "/index.html";
+          } else {
+            hrefValue += globalThis.lb.dotHtmlForLinks() ? "" : ".html";
+            if (hrefValue.startsWith(globalThis.lb.globalVariables()['website_url'])) {
+              hrefValue = hrefValue.replace(globalThis.lb.globalVariables()['website_url'], "");
+            } else if (hrefValue.startsWith("http")) {
+              return;
+            }
           }
-          if (hrefValue.startsWith("http")) return;
+          
           generateWebsite(false, (wf) => loadFileIntoIframe(wf, hrefValue, iframe));
         }
       });
