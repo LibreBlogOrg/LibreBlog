@@ -72,12 +72,16 @@ These other projects are also being used:
 ## Screenshots
 
 ![Analysis](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/analysis.avif)
+*An example of how __relations__ can enrich articles. The timeline and 'key elements' were generated from relations.*
 
 ![References](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/references.avif)
+*References are imported from one or more RIS files.*
 
 ![Editor](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/editor.avif)
+*Articles can be written using Markdown syntax and Twig code.*
 
 ![Inserting images](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/inserting-images.avif)
+*Simple image picker. The __theme__ takes care of inserting versions of the image with the appropriate size.*
 
 ![Media library](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/media-library.avif)
-##
+*Media library*
