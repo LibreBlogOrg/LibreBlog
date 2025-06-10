@@ -395,7 +395,7 @@ Options -Indexes
 
     for (let i = 0; i < args.length; i++) {
       const column = args[i][1];
-      header += "<th class='" + getTdClass(id, column)[0] + "'><div>" + column + (column !== thumbnail_column ? " <span>🞃</span>" : "") + "</div></th>";
+      header += "<th class='" + getTdClass(id, column)[0] + "'><div>" + column + (column !== thumbnail_column ? " <span><img class='data-table-icon' src='images/chevron-down.svg' /></span>" : "") + "</div></th>";
     }    
     header += "</tr>";
 
@@ -627,21 +627,22 @@ Options -Indexes
       if (args[i][1] === thumbnail_column) continue;
       
       const div = ths[i].getElementsByTagName("div")[0];
-      div.innerHTML = args[i][1] + " <span id='th-" + i + "'>🞃</span>";
+      div.innerHTML = args[i][1] + " <span id='th-" + i + "'><img class='data-table-icon' src='images/chevron-down.svg' /></span>";
       
       const span = globalThis.document.getElementById("th-" + i);
       span.addEventListener("click", async (event) => {
-        if (event.target.innerText === "🞃") {
+        let newSpan;
+        const src = event.target.attributes["src"];
+        if (src && src.value && src.value.includes('chevron-down.svg')) { 
           await fillDOM(db, id, table, args[i][0] + " ASC", ...args);
-          const newSpan = globalThis.document.getElementById("th-" + i);
-          newSpan.innerText = "🞁";
-          newSpan.style.color = "blue";
+          newSpan = globalThis.document.getElementById("th-" + i);
+          newSpan.innerHTML = "<img class='data-table-icon' src='images/chevron-up.svg' />";
         } else {
           await fillDOM(db, id, table, args[i][0] + " DESC", ...args);
-          const newSpan = globalThis.document.getElementById("th-" + i);
-          newSpan.innerText = "🞃";
-          newSpan.style.color = "blue";
+          newSpan = globalThis.document.getElementById("th-" + i);
+          newSpan.innerHTML = "<img class='data-table-icon' src='images/chevron-down.svg' />";
         }
+        if (newSpan) newSpan.style = "filter: brightness(0) saturate(100%) invert(7%) sepia(95%) saturate(6909%) hue-rotate(247deg) brightness(128%) contrast(146%);";
 
         if (["media-table"].includes(id)) addThumbnails();
       });

@@ -28,6 +28,13 @@ body {
   vertical-align: middle;
 }
 
+.data-table-icon {
+  display: inline-block;
+  width: 17px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
 .button {
   display: inline-block;
   padding: 5px 10px;
