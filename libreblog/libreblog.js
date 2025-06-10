@@ -20,7 +20,7 @@ const sqlite_version = "3.49.2-build1";
 const marked_version = "15.0.12";
 //MIME types supported by most browsers in the HTMLCanvasElement interface
 const supported_version_formats = ["JPG", "JPEG", "PNG", "WEBP"];
-const debug_mode = true; //If false, it will load modules from a CDN (to be implemented)
+const debug_mode = false; //If false, it will load modules from a CDN (to be implemented)
 let conversion_cache = {}; //Used to store previous conversions from Markdown to HTML
 let declared_values_cache = {}; //Values that are declared inside the field "contents"
 let references_cache = {}; //Used to store all the references of all the articles
@@ -2181,7 +2181,7 @@ const importModules = async function() {
     } else {
       const {default: sqlite3InitModule} = await importFromCDN("https://cdn.jsdelivr.net/npm/@sqlite.org/sqlite-wasm@" + sqlite_version + "/sqlite-wasm/jswasm/sqlite3.mjs", "../dependencies/sqlite3/sqlite3.mjs");
       globalThis.sqlite3InitModule = sqlite3InitModule;
-      await importFromCDN("https://cdn.jsdelivr.net/npm/twig@" + twig_version + "/src/twig.min.js", "../dependencies/twig/twig.min.js")
+      await importFromCDN("https://cdn.jsdelivr.net/npm/twig@" + twig_version + "/twig.min.js", "../dependencies/twig/twig.min.js")
       globalThis.Twig = Twig;
       const {marked} = await importFromCDN("https://cdn.jsdelivr.net/npm/marked@" + marked_version + "/lib/marked.esm.js", "../dependencies/marked/marked.esm.js")
       globalThis.marked = marked;

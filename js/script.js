@@ -10,7 +10,7 @@
   
   /* Constants and default values */
 
-  const debug_mode = true;
+  const debug_mode = false;
   const thumbnail_column = "Thumbnail";
   const supported_formats = ["JPG", "JPEG", "PNG", "APNG", "GIF", "SVG", "WEBP", "AVIF", "ICO"]; 
   const supported_version_formats = ["JPG", "JPEG", "PNG", "WEBP"];
@@ -2144,7 +2144,7 @@ Options -Indexes
 
   const showLoader = function() {
     const loaderDiv = globalThis.document.getElementById("gw-loader");
-    if (loaderDiv.style.display === "flex"){
+    if (!loaderDiv || loaderDiv.style.display === "flex"){
       return;
     }
     loaderDiv.style.display = "flex";
@@ -2152,7 +2152,7 @@ Options -Indexes
 
   const hideLoader = function() {
     const loaderDiv = globalThis.document.getElementById("gw-loader");
-    loaderDiv.style.display = "none";
+    if (loaderDiv) loaderDiv.style.display = "none";
   }
 
   const putFolderIntoZip = function(folder, zip) {
@@ -3888,9 +3888,7 @@ Options -Indexes
     return new Promise((resolve, _) => {
       globalThis.lb.useSqlite(async (db) => {  
         if (globalThis.localStorage.getItem("tables-created") !== "true") {
-          await globalThis.lb.createTables(db);
-          globalThis.localStorage.setItem("tables-created", "true");
-          
+          await globalThis.lb.createTables(db);          
           await insertThemeFromObject(db, default_theme, "current");
           await insertThemeFromObject(db, default_theme, "default");
           await globalThis.lb.setThemeConfig(default_theme["config"]);
@@ -3904,6 +3902,9 @@ Options -Indexes
           await globalThis.lb.setSetting("articles-in-author-profile", "true");
           await globalThis.lb.setSetting("article-in-feedback", "false");
           await globalThis.lb.setSetting("website-language", "en");
+          
+          globalThis.localStorage.setItem("tables-created", "true");
+          hideLoader();
         } else {
           await globalThis.lb.updateSettings();
           fetchData(db);
@@ -4173,7 +4174,7 @@ Options -Indexes
         await import ("../dependencies/ace/mode-javascript.js");
         await import ("../dependencies/ace/mode-xml.js");
         await import ("../dependencies/ace/theme-github_light_default.js");
-        ace.config.set('basePath', '../dependencies/ace')
+        ace.config.set('basePath', '../dependencies/ace');
       }
     } else {
       if (["index"].includes(page)) {
@@ -4188,11 +4189,13 @@ Options -Indexes
         await importFromCDN("https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min/mode-javascript.js", "../dependencies/ace/mode-javascript.js");
         await importFromCDN("https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min/mode-xml.js", "../dependencies/ace/mode-xml.js");
         await importFromCDN("https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min/theme-github_light_default.js", "../dependencies/ace/theme-github_light_default.js");
+        ace.config.set('basePath', "https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min");
       }
     }
   }
 
   const start = async function(lb) {
+    if (globalThis.localStorage.getItem("tables-created") !== "true") showLoader();
     preFormatThead();
 
     if (debug_mode === true || extensionEnvironment()) {
