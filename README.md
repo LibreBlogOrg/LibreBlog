@@ -41,7 +41,7 @@ Below is an overview of the features included in this project and those that are
 * Editorial workflow
 * User management
 
-In short, LibreBlog is just a piece of software that runs inside your browser and does not offer features that require a server. It is therefore more suited for bloggers and independent journalists than for large news websites.
+In short, LibreBlog is a piece of software that runs inside your browser and does not offer features that require a server. It is therefore more suited for bloggers and independent journalists than for large news websites.
 
 ## Installation
 
