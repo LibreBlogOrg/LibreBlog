@@ -58,6 +58,8 @@ The best way to use LibreBlog is to install it as a browser extension. That way,
 
 Currently, there is only one theme and the possibility to customize the colors. So if you enjoy designing themes, please read this [article](https://blog.libreblog.org/articles/creating-a-new-theme) and consider making a theme available to the community :purple_heart:.
 
+**Supported Browsers**: The [editor](https://editor.libreblog.org) website is supported on Chromium-based browsers, including Google Chrome and Microsoft Edge. Other browsers may not be compatible.
+
 ## Project dependencies
 
 This project depends heavily on these two projects:
