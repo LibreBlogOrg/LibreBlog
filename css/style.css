@@ -883,7 +883,7 @@ body {
 #editor-container {
   display: block;
   margin: 0;
-  height: calc(100vh - 200px);
+  height: calc(100svh - 200px);
   padding: 5px;
   border-radius: 5px;
   border: 1px solid LightGrey;
@@ -933,7 +933,7 @@ body {
 
 #editor-css, #editor-html {
   background-color: White;
-  height: calc(100vh - 200px);
+  height: calc(100svh - 200px);
   width: 85%;
   border-radius: 5px;
   border: 1px solid Grey;
@@ -961,7 +961,7 @@ body {
 #preview-iframe {
   width: 100%;
   min-height: 600px;
-  height: calc(100vh - var(--horizontal-bar-height) - 26px);
+  height: calc(100svh - var(--horizontal-bar-height) - 26px);
   border: 0;
   outline: 1px solid Grey;
 }
@@ -983,11 +983,11 @@ body {
     display: block;
     padding: 20px;
     width: 90%;
-    height: 90vh;
+    height: 90svh;
 
     #preview-container {
       display: block;
-      max-height: calc(90vh - 10px);
+      max-height: calc(90svh - 10px);
       overflow: scroll;
     }
 
@@ -1004,7 +1004,7 @@ body {
     display: block;
     padding: 20px;
     width: 90%;
-    height: 90vh;
+    height: 90svh;
 
     #media-modal-title {
       display: inline-block;
@@ -1030,7 +1030,7 @@ body {
     #media-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      max-height: calc(90vh - 10px);
+      max-height: calc(90svh - 10px);
       overflow: scroll;
 
       .media-item {
@@ -1099,7 +1099,7 @@ body {
   .modal-content {
     padding: 0 20px 10px 20px;
     width: 780px;
-    max-height: 80vh;
+    max-height: 80svh;
     overflow: hidden;
 
     #close-references-modal {
@@ -1142,11 +1142,11 @@ body {
     }
 
     #mrt-wrapper1 {
-      max-height: calc(80vh - 70px);
+      max-height: calc(80svh - 70px);
       overflow: hidden;
 
       #mrt-wrapper2 {
-        max-height: calc(80vh - 80px);
+        max-height: calc(80svh - 80px);
         overflow: scroll;
 
         .data-table {
@@ -1625,7 +1625,7 @@ body {
 
   #preview-iframe {
     min-height: 400px;
-    height: calc(100vh - var(--horizontal-bar-height-mobile) - 26px);
+    height: calc(100svh - var(--horizontal-bar-height-mobile) - 26px);
   }
 
   #content {
