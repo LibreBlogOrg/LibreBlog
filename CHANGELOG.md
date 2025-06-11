@@ -7,9 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2]
+
 ### Fixed
 
 - Unicode character in data tables replaced by image, as it was not being displayed correctly by various browsers.
+- Adjusting the media table.
+
+### Added
+
+- Information on browser support in the README.
 
 ## [1.0.1] - 2024-06-10
 
