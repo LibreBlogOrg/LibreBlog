@@ -506,7 +506,7 @@ Options -Indexes
         if (["Type", "Year"].includes(columnName)) small = true;
         break;
       case "media-table":
-        if (["File Ext.", "Size (bytes)"].includes(columnName)) small = true;
+        if (["File Ext."].includes(columnName)) small = true;
         break;
       default:
     }
@@ -531,6 +531,9 @@ Options -Indexes
       case "relations-table":
         if (["Article 1", "Article 2"].includes(columnName) && !veryBigScreen()) modest = true;
         break;
+      case "media-table":
+        if (["Size (bytes)"].includes(columnName)) modest = true;
+        break;        
       default:
         if (["ID"].includes(columnName) && !veryBigScreen()) modest = true;
     }
