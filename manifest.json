@@ -1,6 +1,6 @@
 {
   "name": "LibreBlog",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An in-browser Static Site Generator focused on content-rich blogs and news websites",
   "manifest_version": 3,
   "content_security_policy": {
