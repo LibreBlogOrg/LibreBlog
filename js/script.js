@@ -302,13 +302,13 @@ Options -Indexes
         settings: await globalThis.lb.getAllResultRows("settings", db, null)
       };
 
-      const jsonDbStr = JSON.stringify(jsonDb);
+      const jsonDbStr = JSON.stringify(jsonDb, null, 2);
       const blob = new Blob([jsonDbStr], {type: "text/plain;charset=utf-8"});
       saveFile(blob, "mydb.json");
     });
   }
 
-  const insertThemeFromObject = async function(db, theme, theme_uri) {
+  const insertThemeFromObject = async function(db, theme, themeUri) {
     let templates = structuredClone(theme.templates);
     templates.push({
       template_uri: "image",
@@ -339,7 +339,7 @@ Options -Indexes
           "contents, " +
           "created, " +
           "updated " +
-          ") VALUES ('" + theme_uri + "', ?, ?, ?, ?, ?, " +
+          ") VALUES ('" + themeUri + "', ?, ?, ?, ?, ?, " +
           "STRFTIME('%Y-%m-%d %H:%M', DATETIME('now','localtime')), " +
           "STRFTIME('%Y-%m-%d %H:%M', DATETIME('now','localtime')))",
         bind: [
@@ -1267,7 +1267,7 @@ Options -Indexes
   const exportTheme = function() {
     globalThis.lb.useSqlite(async (db) => {
       const resultRows = await db.exec({
-        sql: "SELECT template_uri, template_type, content_type, contents FROM templates WHERE theme_uri = 'current'",
+        sql: "SELECT template_uri, template_set, template_type, content_type, contents FROM templates WHERE theme_uri = 'current'",
         rowMode: 'object'
       });
 
@@ -1282,24 +1282,62 @@ Options -Indexes
         }
         
         templates.push({
-          "template_uri": resultRows[i]["template_uri"], 
-          "template_set": resultRows[i]["template_set"], 
-          "template_type": resultRows[i]["template_type"], 
-          "content_type": resultRows[i]["content_type"], 
-          "contents": resultRows[i]["contents"]
+          "template_uri": resultRows[i]["template_uri"] ? resultRows[i]["template_uri"] : "", 
+          "template_set": resultRows[i]["template_set"] ? resultRows[i]["template_set"] : "", 
+          "template_type": resultRows[i]["template_type"] ? resultRows[i]["template_type"] : "", 
+          "content_type": resultRows[i]["content_type"] ? resultRows[i]["content_type"] : "", 
+          "contents": resultRows[i]["contents"] ? resultRows[i]["contents"] : ""
         });
       }
-      
+
+      const randomUri = globalThis.lb.generateRandomId();
       let theme = {
-        "theme_uri": "current", 
+        "theme_uri": "theme_" + randomUri, 
         "config": globalThis.lb.getThemeConfig(),
         "templates": templates,
         "image": image ? image : ""
       };
       
-      const themeStr = JSON.stringify(theme);
+      const themeStr = JSON.stringify(theme, null, 2);
       const blob = new Blob([themeStr], {type: "text/plain;charset=utf-8"});
-      saveFile(blob, "mytheme.json");
+      saveFile(blob, "theme_" + randomUri + ".json");
+    });
+  }
+
+  const exportThemeAsZipFolder = function(event) {
+    event.preventDefault();
+    
+    globalThis.lb.useSqlite(async (db) => {
+      const resultRows = await db.exec({
+        sql: "SELECT template_uri, template_set, template_type, content_type, contents FROM templates WHERE theme_uri = 'current'",
+        rowMode: 'object'
+      });
+      let image = globalThis.window.prompt("If you want, insert a new screenshot of this theme in data URI code [data:image...]");
+
+      const zip = new JSZip();
+      const templatesFolder = zip.folder("templates");
+      
+      for (let i = 0; i < resultRows.length; i++) {
+        if (resultRows[i]["template_uri"] === "config") continue;
+        if (resultRows[i]["template_uri"] === "image" && !image) {
+          image = resultRows[i]["contents"];
+          continue;
+        }
+
+        const t = resultRows[i];
+        const folder = templatesFolder.folder(t["template_type"]).folder(t["template_set"]).folder(t["content_type"]);
+        folder.file(t["template_uri"] + "." + t["content_type"], t["contents"]);
+      }
+
+      const configData = JSON.stringify(globalThis.lb.getThemeConfig(), null, 2);
+      const randomUri = globalThis.lb.generateRandomId();
+      
+      zip.file("theme_uri.txt", "theme_" + randomUri);
+      zip.file("config.json", configData);
+      zip.file("image.txt", image);
+      zip.generateAsync({type:"blob"}).then(function(content) {
+        saveFile(content, "theme_" + randomUri + ".zip");
+      });
     });
   }
 
@@ -2553,6 +2591,9 @@ Options -Indexes
       const jsonDbBtn = globalThis.document.getElementById("download-json-db");
       jsonDbBtn.addEventListener("click", jsonDbBtnHandler);
 
+      const exportThemeZip = globalThis.document.getElementById("export-theme-zip");
+      exportThemeZip.addEventListener("click", exportThemeAsZipFolder);
+
       const persistentStorage = globalThis.document.getElementById("persistent-storage");
       persistentStorage.addEventListener("click", persistentStorageHandler);
 
@@ -3543,31 +3584,35 @@ Options -Indexes
     importThemeInput.click();
   }
 
+  const loadTheme = function(theme) {
+    const themeUri = globalThis.window.prompt("Choose a name for the theme.", theme["theme_uri"]);
+    globalThis.lb.useSqlite(async (db) => {
+      await insertThemeFromObject(db, theme, themeUri ? themeUri : theme["theme_uri"]);
+      reloadPage();
+    });
+  }
+
   const importThemeHandler = function(event) {
     let file = event.target.files[0];
     if (!file | !file.name) return;
-    if (!file.name.toUpperCase().endsWith('.JSON')) {
+    
+    if (file.name.toUpperCase().endsWith('.JSON')) {
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        if (reader.result) {
+          try {
+            const theme = JSON.parse(reader.result);
+            loadTheme(theme);
+          } catch (e) {
+            globalThis.window.alert("It was not possible to load this JSON file.");
+          }
+        }
+      });
+
+      reader.readAsText(file);
+    } else {
       globalThis.window.alert('The only supported file extension is JSON.');
     }
-
-    const reader = new FileReader();
-    reader.addEventListener('load', () => {
-      let theme;
-      if (reader.result) {
-        try {
-          theme = JSON.parse(reader.result);
-          const themeUri = globalThis.window.prompt("Choose a name for the theme.");
-          globalThis.lb.useSqlite(async (db) => {
-            await insertThemeFromObject(db, theme, themeUri);
-            reloadPage();
-          });
-        } catch (e) {
-          globalThis.window.alert("It was not possible to load this JSON file.");
-        }
-      }
-    });
-    
-    reader.readAsText(file);
   }
 
   const deleteThemeHandler = function(e) {
@@ -4166,9 +4211,11 @@ Options -Indexes
     const page = thisPage();
     
     if (debug_mode === true || extensionEnvironment()) {
-      if (["index"].includes(page)) {
+      if (["index", "settings"].includes(page)) {
         await import ("../dependencies/jszip/jszip.min.js");
-      } else if (["article-edit", "series-edit", "section-edit", "relation-edit", "author-edit", "settings", "templates"].includes(page)) {
+      }
+      
+      if (["article-edit", "series-edit", "section-edit", "relation-edit", "author-edit", "settings", "templates"].includes(page)) {
         await import ("../dependencies/ace/ace.js");
         await import ("../dependencies/ace/ext-language_tools.js");
         await import ("../dependencies/ace/mode-markdown.js");
@@ -4181,9 +4228,11 @@ Options -Indexes
         ace.config.set('basePath', '../dependencies/ace');
       }
     } else {
-      if (["index"].includes(page)) {
+      if (["index", "settings"].includes(page)) {
         await importFromCDN("https://cdn.jsdelivr.net/npm/jszip@" + jszip_version + "/dist/jszip.min.js", "../dependencies/jszip/jszip.min.js");
-      } else if (["article-edit", "series-edit", "section-edit", "relation-edit", "author-edit", "settings", "templates"].includes(page)) {
+      }
+      
+      if (["article-edit", "series-edit", "section-edit", "relation-edit", "author-edit", "settings", "templates"].includes(page)) {
         await importFromCDN("https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min/ace.js", "../dependencies/ace/ace.js");
         await importFromCDN("https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min/ext-language_tools.js", "../dependencies/ace/ext-language_tools.js");
         await importFromCDN("https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min/mode-markdown.js", "../dependencies/ace/mode-markdown.js");
