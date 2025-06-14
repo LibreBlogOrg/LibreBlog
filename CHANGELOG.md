@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0]
+
+### Fixed
+
+- Data that was missing in the exported themes.
+
+### Improved
+
+- The formatting of JSON files.
+
+### Added
+
+- New feature to export themes as ZIP folders.
+
 ## [1.0.2]
 
 ### Fixed
