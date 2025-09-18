@@ -1374,6 +1374,12 @@ const configTwig = function() {
     return "<a href='#ref-" + args.counter + "' class='ref-link' property='dc:relation'>" + args.counter + "</a>";
   });
 
+  globalThis.Twig.extendFunction('note', (noteText, args) => {
+    references_cache[args.uri + "/" + ++args.counter] = noteText;
+    references_cache[args.uri + "/counter"] = args.counter;
+    return "<a href='#ref-" + args.counter + "' class='ref-link'>" + args.counter + "</a>";
+  });
+
   globalThis.Twig.extendFunction('img', (id, args, options) => {
     if (!args.media[id]) return "";
     if (!options) options = {};
