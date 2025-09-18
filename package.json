@@ -1,6 +1,6 @@
 {
   "name": "libreblog",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "An in-browser Static Site Generator focused on content-rich blogs and news websites",
   "main": "libreblog/libreblog.js",
   "type": "module",
