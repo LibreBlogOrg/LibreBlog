@@ -1443,7 +1443,7 @@ const configTwig = function() {
   });
 
   globalThis.Twig.extendFunction('rfc822_datetime', (dt, tz) => {
-    const dateString = dt.replace(" ", "T") + tz;
+    const dateString = dt.replace(" ", "T") + (tz ? tz : "");
    
     const dayStrings = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const monthStrings = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
