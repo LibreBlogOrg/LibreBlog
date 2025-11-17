@@ -1443,7 +1443,7 @@ const configTwig = function() {
   });
 
   globalThis.Twig.extendFunction('rfc822_datetime', (dt, tz) => {
-    const dateString = dt.replace(" ", "T") + (tz ? tz : "");
+    const dateString = dt.replace(" ", "T") + (tz ? tz : "Z");
    
     const dayStrings = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const monthStrings = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -1451,12 +1451,12 @@ const configTwig = function() {
     const timeStamp = Date.parse(dateString);
     const date = new Date(timeStamp);
     
-    const day = dayStrings[date.getDay()];
-    const dayNumber = addLeadingZero(date.getDate());
-    const month = monthStrings[date.getMonth()];
-    const year = date.getFullYear();
-    const time = `${addLeadingZero(date.getHours())}:${addLeadingZero(date.getMinutes())}:00`;
-    const timezone = date.getTimezoneOffset() === 0 ? "GMT" : "BST";
+    const day = dayStrings[date.getUTCDay()];
+    const dayNumber = addLeadingZero(date.getUTCDate());
+    const month = monthStrings[date.getUTCMonth()];
+    const year = date.getUTCFullYear();
+    const time = `${addLeadingZero(date.getUTCHours())}:${addLeadingZero(date.getUTCMinutes())}:00`;
+    const timezone = "GMT";
     
     return `${day}, ${dayNumber} ${month} ${year} ${time} ${timezone}`;
   });
