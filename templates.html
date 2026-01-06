@@ -401,6 +401,7 @@
               <h4>Functions</h4>
               <ul>
                 <li>r(refId: string, args: object): string [inserts a reference and returns a string with an HTML element with an anchor link] </li>
+                <li>note(noteText: string, args: object): string [inserts a note and returns a string with an HTML element with an anchor link] </li>
                 <li>img(imgId: string, args: object, options: object): string [returns a string with an IMG element. The possible attributes of <i>options</i> are: width (number), height (number), version (string), title (string/boolean), caption (string/boolean), alt (string/boolean) and style (string)] </li>
                 <li>media_url(mediaId: string, media: object): string [returns the URL corresponding to the media ID] </li>   
                 <li>photo_version(photo: object, version: string): string [returns the URL of the requested image version. If it does not exist, it returns the smallest version that is larger than the one requested] </li>   
@@ -416,6 +417,7 @@
                 <li>declare(key: string, value: string, args: object): void [this function allows user-edited pages to pass information to templates]</li>
                 <li>format_date(dateStr: string, options: object): string [formats dates in a human-readable format]</li>
                 <li>iso_datetime(dateStr: string): string [formats dates according to the ISO 8601 standard]</li>
+                <li>rfc822_datetime(dateStr: string, timezone: string): string [formats dates according to the RFC 822 standard]</li>
               </ul>
             </code>
           </div>
