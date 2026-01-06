@@ -14,7 +14,7 @@ let RIS_MAP;
 
 /* Global variables and constants */
 
-const libreblog_version = "1.0.0";
+const libreblog_version = "1.2.3";
 const twig_version = "1.17.1";
 const sqlite_version = "3.49.2-build1";
 const marked_version = "15.0.12";
