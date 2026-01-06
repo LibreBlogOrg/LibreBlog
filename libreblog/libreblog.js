@@ -446,7 +446,7 @@ const getOneRow = async function(uri, table, db) {
 
 const getResultRowsForSeriesPage = async function(uri, db) {
   let resultRows = await db.exec({
-    sql: "SELECT * FROM articles WHERE series_uri = '" + uri + "' AND status = 'Published'",
+    sql: "SELECT * FROM articles WHERE series_uri = '" + uri + "' AND status = 'Published' ORDER BY published DESC, created DESC",
     rowMode: 'object'
   });
 
