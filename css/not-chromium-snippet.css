@@ -1,0 +1,10 @@
+.not-chromium-warning {
+  color: #202020;
+  background: #ffffde;
+  border: 2px solid #e2e2a6;
+  padding: 0.3em 0.4em;
+  border-radius: 4px;
+  font-weight: 500;
+  display: inline-block;
+  line-height: 1;
+}
