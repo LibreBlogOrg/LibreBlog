@@ -1980,7 +1980,7 @@ Options -Indexes
           if (!href) href = event.srcElement.parentElement.attributes['href']; 
           let hrefValue = href.value;
           
-          if (hrefValue === globalThis.lb.globalVariables()['website_url']) {
+          if (hrefValue === globalThis.lb.globalVariables()['website_url'] || hrefValue === "/") {
             hrefValue = "/index.html";
           } else {
             hrefValue += globalThis.lb.dotHtmlForLinks() ? "" : ".html";
