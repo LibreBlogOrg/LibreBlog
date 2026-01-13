@@ -1121,7 +1121,8 @@ Options -Indexes
   }
 
   const addURItoURL = function(uri) {
-    globalThis.location.href = globalThis.location.href.split("?uri=")[0] + "?uri=" + uri;
+    const encodedUri = encodeURIComponent(uri);
+    globalThis.location.href = globalThis.location.href.split("?uri=")[0] + "?uri=" + encodedUri;
   }
 
   const getRelationURI = async function(fields, fieldValues, db) {
@@ -2712,7 +2713,7 @@ Options -Indexes
     const fileExtensionInput = globalThis.document.getElementById("file-extension");
     fileExtensionInput.value = fileExt;
     const selectedFile = globalThis.document.getElementById("selected-media-file");
-    selectedFile.innerHTML = "<div id='selected-file-text'>Selected file:</div> <div id='filename'>" + file.name + "</div><a id='remove-media-file' class='slim-button'>Remove it</a>";
+    selectedFile.innerHTML = "<div id='selected-file-text'>Selected file:</div> <div id='filename'>" + escapeHTML(file.name) + "</div><a id='remove-media-file' class='slim-button'>Remove it</a>";
     const removeMediaFile = globalThis.document.getElementById("remove-media-file");
     removeMediaFile.addEventListener("click", removeMediaFileHandler);
     const dropZoneText = globalThis.document.getElementById("drop-zone-text");
