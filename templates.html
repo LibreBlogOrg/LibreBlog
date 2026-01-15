@@ -400,23 +400,25 @@
               </ul>
               <h4>Functions</h4>
               <ul>
-                <li>r(refId: string, args: object): string [inserts a reference and returns a string with an HTML element with an anchor link] </li>
-                <li>note(noteText: string, args: object): string [inserts a note and returns a string with an HTML element with an anchor link] </li>
-                <li>img(imgId: string, args: object, options: object): string [returns a string with an IMG element. The possible attributes of <i>options</i> are: width (number), height (number), version (string), title (string/boolean), caption (string/boolean), alt (string/boolean) and style (string)] </li>
-                <li>media_url(mediaId: string, media: object): string [returns the URL corresponding to the media ID] </li>   
-                <li>photo_version(photo: object, version: string): string [returns the URL of the requested image version. If it does not exist, it returns the smallest version that is larger than the one requested] </li>   
-                <li>reference(articleUri: string, pos: number): string [returns the reference ID related to a given reference position]</li>
-                <li>references_length(articleUri: string): number [returns the number of references in an article]</li>
+                <li>declare(key: string, value: string, args: object): void [this function allows user-edited pages to pass information to templates]</li>
+                <li>escape_latex(text: string): string [escapes LaTeX special characters]</li>
+                <li>format_date(dateStr: string, options: object): string [formats dates in a human-readable format]</li>
                 <li>get_authors(ref: object): array[string] [returns the authors in a reference object]</li>
-                <li>get_urls(ref: object): array[string] [returns the URLs (UR) in a reference object]</li>
+                <li>get_latex(markdown: string, footnotes: array[array[string]], options: object): string [converts Markdown to LaTeX]</li>
                 <li>get_py(ref: object): string [returns the publication year in a reference object]</li>
+                <li>get_tags(ref: object, tags: array): array[array] [it receives an array with the desired tags (note: this array may contain arrays with tags that function as synonyms. For example: [["VL", "VO", "T3"], "IS", "SP"]. If "VL" is found, the function will not search for the other tags within the internal array. The function returns an array with an array for each tag found. In this array, there are three elements (the tag itself, a label for the tag and the value found)]</li>
                 <li>get_title(ref: object): string [returns the title in a reference object]</li>
                 <li>get_type(ref: object): string [returns the type of a reference object. For example: "Journal Article"]</li>
-                <li>get_tags(ref: object, tags: array): array[array] [it receives an array with the desired tags (note: this array may contain arrays with tags that function as synonyms. For example: [["VL", "VO", "T3"], "IS", "SP"]. If "VL" is found, the function will not search for the other tags within the internal array. The function returns an array with an array for each tag found. In this array, there are three elements (the tag itself, a label for the tag and the value found)]</li>
-                <li>reference_loc(articleUri: string, pos: number): string [returns "Ibid." if the previous reference is equal to the given reference, "Loc. cit." if there is another reference equal to the given reference but not immediately preceding it, and "" for the other cases]</li>
-                <li>declare(key: string, value: string, args: object): void [this function allows user-edited pages to pass information to templates]</li>
-                <li>format_date(dateStr: string, options: object): string [formats dates in a human-readable format]</li>
+                <li>get_urls(ref: object): array[string] [returns the URLs (UR) in a reference object]</li>
+                <li>img(imgId: string, args: object, options: object): string [returns a string with an IMG element. The possible attributes of <i>options</i> are: width (number), height (number), version (string), title (string/boolean), caption (string/boolean), alt (string/boolean) and style (string)] </li>
                 <li>iso_datetime(dateStr: string): string [formats dates according to the ISO 8601 standard]</li>
+                <li>media_url(mediaId: string, media: object): string [returns the URL corresponding to the media ID] </li>   
+                <li>note(noteText: string, args: object): string [inserts a note and returns a string with an HTML element with an anchor link] </li>
+                <li>photo_version(photo: object, version: string): string [returns the URL of the requested image version. If it does not exist, it returns the smallest version that is larger than the one requested] </li>   
+                <li>r(refId: string, args: object): string [inserts a reference and returns a string with an HTML element with an anchor link] </li>
+                <li>reference(articleUri: string, pos: number): string [returns the reference ID related to a given reference position]</li>
+                <li>reference_loc(articleUri: string, pos: number): string [returns "Ibid." if the previous reference is equal to the given reference, "Loc. cit." if there is another reference equal to the given reference but not immediately preceding it, and "" for the other cases]</li>
+                <li>references_length(articleUri: string): number [returns the number of references in an article]</li>
                 <li>rfc822_datetime(dateStr: string, timezone: string): string [formats dates according to the RFC 822 standard]</li>
               </ul>
             </code>
