@@ -83,7 +83,7 @@
                 For more information on the Markdown markup language, visit this <a href='https://www.markdownguide.org/basic-syntax/'  target="_blank">Markdown Guide</a>.<br/>
                 <br/>
                 <i>Note 1</i>: You can insert an image from your media library into the body of the article with an expression like this: 
-                <b>{{ img('image-id.jpg', a, {'width': '725', 'height': '400', 'title': true, 'caption': true, 'style': 'float: right', 'version': 'small'}) }}</b>.
+                <b>{{ img('image-id.jpg', a, {'width': '5cm', 'height': '4cm', 'title': true, 'caption': true, 'float': 'right', 'version': 'small'}) }}</b>.
                 Remark: You can enter a <i>string</i> in the <i>title/caption</i> attribute if you want to use a text other than the one defined in the image record. 
                 For example: <b>{{ img('image-id.jpg', a, {'title': 'My tooltip'}) }}</b>.<br/>
                 <br/>
@@ -109,6 +109,8 @@
                 <i>Note 6</i>: You don't need to write raw LaTeX to create a <b>LaTeX article</b>. Basic Markdown is automatically converted to LaTeX, references become footnotes, images are inserted, and the summary becomes the abstract.<br/>
                 <br/>
                 <i>Note 7</i>: LaTeX articles are not rendered in the preview window.<br/>
+                <br/>
+                <i>Note 8</i>: In LaTeX articles you can only use these length units with image width and height: pt, bp, in, mm, cm, pc, em, ex, dd, cc and sp. Image captions and titles (alt) are not displayed.<br/>
               </code></div>
           </details>
         </div>
