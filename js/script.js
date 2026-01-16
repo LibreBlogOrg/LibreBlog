@@ -645,7 +645,7 @@ Options -Indexes
           newSpan = globalThis.document.getElementById("th-" + i);
           newSpan.innerHTML = "<img class='data-table-icon' src='images/chevron-down.svg' />";
         }
-        if (newSpan) newSpan.style = "filter: brightness(0) saturate(100%) invert(7%) sepia(95%) saturate(6909%) hue-rotate(247deg) brightness(128%) contrast(146%);";
+        if (newSpan) newSpan.style.cssText = "filter: brightness(0) saturate(100%) invert(7%) sepia(95%) saturate(6909%) hue-rotate(247deg) brightness(128%) contrast(146%);";
 
         if (["media-table"].includes(id)) addThumbnails();
       });
@@ -1395,9 +1395,9 @@ Options -Indexes
     
     for (let i = 0; i < length; i++) {;
       if (i >= start && i < end){
-        trs[i].style = "display:run-in";
+        trs[i].style.cssText = "display:run-in";
       } else {
-        trs[i].style = "display:none";
+        trs[i].style.cssText = "display:none";
       }
     }
 
@@ -1579,20 +1579,20 @@ Options -Indexes
       
       if (!filterText || filterType === 'none') {
         if (i < entriesPerPage) {
-          trs[i].style = "display:run-in";
+          trs[i].style.cssText = "display:run-in";
           countVisible++;
         } else {
-          trs[i].style = "display:none";
+          trs[i].style.cssText = "display:none";
         }
       } else {
         let tds = trs[i].getElementsByTagName("td");
         for (let j = 0; j < tds.length; j++) {
           if (tds[j].attributes["name"] && tds[j].attributes["name"].value === filterType) {
             if (tds[j].innerText.toLowerCase().includes(filterText)) {
-              trs[i].style = "display:run-in";
+              trs[i].style.cssText = "display:run-in";
               countVisible++;
             } else {
-              trs[i].style = "display:none";
+              trs[i].style.cssText = "display:none";
             }
             break;
           }
@@ -1606,13 +1606,13 @@ Options -Indexes
     const dataTableTo = globalThis.document.getElementById("data-table-to");
     const dataTableOf = globalThis.document.getElementById("data-table-of");
     if (!filterText || filterType === 'none') {
-      tfootPagination.style = "display:run-in";
-      tfootEntries.style = "display:run-in";
+      tfootPagination.style.cssText = "display:run-in";
+      tfootEntries.style.cssText = "display:run-in";
       dataTableTo.innerText = entriesPerPage < countValid ? entriesPerPage : countValid; 
       dataTableOf.innerText = countValid;
     } else {
-      tfootPagination.style = "display:none";
-      tfootEntries.style = "display:none";
+      tfootPagination.style.cssText = "display:none";
+      tfootEntries.style.cssText = "display:none";
       dataTableTo.innerText = countVisible;
       dataTableOf.innerText = countVisible;
     }
