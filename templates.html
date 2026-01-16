@@ -403,8 +403,8 @@
                 <li>declare(key: string, value: string, args: object): void [this function allows user-edited pages to pass information to templates]</li>
                 <li>escape_latex(text: string): string [escapes LaTeX special characters]</li>
                 <li>format_date(dateStr: string, options: object): string [formats dates in a human-readable format]</li>
+                <li>gen_latex(markdown: string, footnotes: array[array[string]], options: object): string [converts Markdown to LaTeX]</li>
                 <li>get_authors(ref: object): array[string] [returns the authors in a reference object]</li>
-                <li>get_latex(markdown: string, footnotes: array[array[string]], options: object): string [converts Markdown to LaTeX]</li>
                 <li>get_py(ref: object): string [returns the publication year in a reference object]</li>
                 <li>get_tags(ref: object, tags: array): array[array] [it receives an array with the desired tags (note: this array may contain arrays with tags that function as synonyms. For example: [["VL", "VO", "T3"], "IS", "SP"]. If "VL" is found, the function will not search for the other tags within the internal array. The function returns an array with an array for each tag found. In this array, there are three elements (the tag itself, a label for the tag and the value found)]</li>
                 <li>get_title(ref: object): string [returns the title in a reference object]</li>
