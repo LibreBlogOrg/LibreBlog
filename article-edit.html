@@ -83,9 +83,9 @@
                 For more information on the Markdown markup language, visit this <a href='https://www.markdownguide.org/basic-syntax/'  target="_blank">Markdown Guide</a>.<br/>
                 <br/>
                 <i>Note 1</i>: You can insert an image from your media library into the body of the article with an expression like this: 
-                <b>{{ img('image-id.jpg', a, {width: 725, height: 400, title: true, caption: true, style: 'float: right', version: 'small'}) }}</b>.
+                <b>{{ img('image-id.jpg', a, {'width': '725', 'height': '400', 'title': true, 'caption': true, 'style': 'float: right', 'version': 'small'}) }}</b>.
                 Remark: You can enter a <i>string</i> in the <i>title/caption</i> attribute if you want to use a text other than the one defined in the image record. 
-                For example: <b>{{ img('image-id.jpg', a, {title: 'My tooltip'}) }}</b>.<br/>
+                For example: <b>{{ img('image-id.jpg', a, {'title': 'My tooltip'}) }}</b>.<br/>
                 <br/>
                 <i>Note 2</i>: You can use the <i>declare</i> function within the Twig code to change some template settings without having to change it for all the other articles. 
                 For example, <b>{{ declare('timeline-label', 'Events', a) }}</b> changes the label of the list of events displayed on the <i>Analysis</i> page, which now displays the text "Events" instead of "Timeline". 
