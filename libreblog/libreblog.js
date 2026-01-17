@@ -16,7 +16,7 @@ let RIS_MAP;
 
 const libreblog_version = "1.3.0";
 const twig_version = "1.17.1";
-const sqlite_version = "3.49.2-build1";
+//const sqlite_version = "3.49.2-build1";
 const marked_version = "15.0.12";
 //MIME types supported by most browsers in the HTMLCanvasElement interface
 const supported_version_formats = ["JPG", "JPEG", "PNG", "WEBP"];
@@ -1004,12 +1004,16 @@ const convertGenericToHTML = function(specific, row, type) {
 
 const convertContentsToHTML = async function(row, type, mediaFilesData) {
   if (!row || !row["contents"]) return;
+
   if (conversion_cache["contents/" + type + "/" + row["uri"]]) {
     row["contents"] = conversion_cache["contents/" + type + "/" + row["uri"]];
+    row["markdown_contents"] = conversion_cache["markdown_contents/" + type + "/" + row["uri"]];
     row["declared_values"] = structuredClone(declared_values_cache[type + "/" + row["uri"]]);
   } else {
     let declaredValues = {};
     [row["contents"], declaredValues] = renderPageAsTemplate(row["uri"], row["contents"], mediaFilesData);
+    row["markdown_contents"] = row["contents"];
+    conversion_cache["markdown_contents/" + type + "/" + row["uri"]] = row["contents"];
     declared_values_cache[type + "/" + row["uri"]] = declaredValues;
     await updateDeclaredValues(db, type, row, declaredValues);
     convertGenericToHTML("contents", row, type);
@@ -1017,19 +1021,23 @@ const convertContentsToHTML = async function(row, type, mediaFilesData) {
 }
 
 const convertNotesToHTML = function(row, type) { //For now, the type is only "article"
-   convertGenericToHTML('notes', row, type);
+  row["markdown_notes"] = row["notes"];
+  convertGenericToHTML('notes', row, type);
 }
 
 const convertSummaryToHTML = function(row, type) { //For now, the type is only "article"
-   convertGenericToHTML('summary', row, type);
+  row["markdown_summary"] = row["summary"];
+  convertGenericToHTML('summary', row, type);
 }
 
 const convertBioToHTML = function(row, type) { //For now, the type is only "author"
-   convertGenericToHTML('bio', row, type);
+  row["markdown_bio"] = row["bio"];
+  convertGenericToHTML('bio', row, type);
 }
 
 const convertContactToHTML = function(row, type) { //For now, the type is only "author"
-   convertGenericToHTML('contact', row, type);
+  row["markdown_contact"] = row["contact"];
+  convertGenericToHTML('contact', row, type);
 }
 
 const getPhotoUrl = function(photo, downloadMode) {
@@ -1380,6 +1388,32 @@ const configTwig = function() {
     return "<a href='#ref-" + args.counter + "' class='ref-link'>" + args.counter + "</a>";
   });
 
+  globalThis.Twig.extendFunction('gen_latex', (markdown, footnotes, options) => {  
+    if (footnotes && footnotes.length > 0) {
+      markdown = dealWithLatexFootnotes(markdown, footnotes, options);
+    }
+
+    markdown = dealWithLatexImages(markdown);
+    markdown = mdLinksToLatex(markdown);
+    markdown = escapeLatexKeepingMdChars(markdown);
+    markdown = mdHeadingsToLatex(markdown);
+    markdown = mdEmphasisToLatex(markdown);
+    markdown = escapeMdChars(markdown);
+
+    markdown = markdownListsToLatex(markdown, options);
+    markdown = mdBlockquoteToLatex(markdown);
+
+    markdown = spaceAfterAmpersand(markdown); //Escape &nbsp; ...
+    markdown = unescapeTemporarilyEscapedLatex(markdown);
+    markdown = escapeHtmlInLatex(markdown);
+
+    return markdown;
+  });
+
+  globalThis.Twig.extendFunction('escape_latex', (text) => {
+    return escapeLatexCompletely(text);
+  });
+
   globalThis.Twig.extendFunction('img', (id, args, options) => {
     if (!args.media[id]) return "";
     if (!options) options = {};
@@ -1390,6 +1424,7 @@ const configTwig = function() {
     let style;
     let height;
     let width;
+    let float;
 
     if (options.alt) {
       alt = (options.alt === true ? args.media[id].alt_text : options.alt);
@@ -1408,18 +1443,19 @@ const configTwig = function() {
     }
 
     if (options.caption) {
-      caption = (options.caption === true ? args.media[id]['photo_info'] : options.caption);
+      caption = (options.caption === true ? args.media[id].info : options.caption);
     }
 
-    if (options.style) style = options.style.replaceAll("\"", "'");
+    if (options.float) float = options.float.replaceAll("\"", "'");
     if (options.height) height = options.height.replaceAll("\"", "'");
     if (options.width) width = options.width.replaceAll("\"", "'");
+    if (!options.style) {
+      style = `${width ? `width: ${width}; ` : ``}${height ? `height: ${height}; ` : ``}${float ? `float: ${float}; ` : ``}`;
+    }
     
-    const img = `<img src="${url}" alt="${alt}" ${title ? `title="${title}" ` : ``}${height ? `height="${height}" ` : ``}${width ? `width="${width}" ` : ``}${style ? `style="${style}" ` : ``}/>`;
+    const img = `<img src="${url}" alt="${alt}" ${title ? `title="${title}" ` : ``}${style ? `style="${style}" ` : ``}/>`;
 
-    if (caption) return `<figure>${img}<figcaption>${caption}</figcaption></figure>`;
-
-    return img;
+    return `<figure>${img}${caption ? `<figcaption>${caption}</figcaption>` : ``}</figure>`;
   });
 
   globalThis.Twig.extendFunction('photo_version', (photo, version) => {
@@ -1597,33 +1633,356 @@ const configTwig = function() {
     const countTs = (dateStr.match(/T/g) || []).length;
     const dateObj = new Date(dateStr);
     const lang = globalThis.navigator && globalThis.navigator.language ? globalThis.navigator.language : "en";
-    if (!options) options = { year: 'numeric', month: 'short', day: 'numeric' };
-
-    switch (countHyphens) {
-      case 0:
-        options = { year: 'numeric' };
-        break;
-      case 1:
-        options = { year: 'numeric', month: 'short' };
-        break;
-      case 2:
-        options = { year: 'numeric', month: 'short', day: 'numeric' };
-        if (countTs === 1) {
-          options['hour'] = 'numeric';
-          options['minute'] = 'numeric';
-        }
-        break;
-      default:
+    if (!options) {
+      switch (countHyphens) {
+        case 0:
+          options = { year: 'numeric' };
+          break;
+        case 1:
+          options = { year: 'numeric', month: 'short' };
+          break;
+        case 2:
+          options = { year: 'numeric', month: 'short', day: 'numeric' };
+          if (countTs === 1) {
+            options['hour'] = 'numeric';
+            options['minute'] = 'numeric';
+          }
+          break;
+        default:
+          options = { year: 'numeric', month: 'short', day: 'numeric' };
+      }
     }
 
     let formattedDate = new Intl.DateTimeFormat(lang, options).format(dateObj);
-    if (lang.startsWith("pt")) {
+    if (lang.startsWith("pt") && options.month === 'short') {
       formattedDate = formattedDate.replaceAll("de ", "");
     }
 
     return formattedDate;
   });
 }
+
+//Handling LaTeX syntax
+const mdEmphasisToLatex = (markdown) => {
+  const patterns = [
+    { regex: /(?<=^|[^A-Za-z0-9])(\*\*\*|___)(?=[^\s])([\s\S]*?[^\s])\1(?=$|[^A-Za-z0-9])/g, 
+      repl: (substr, grp1, grp2) => `\\textbf{\\textit{${mdEmphasisToLatex(grp2)}}}` },
+    { regex: /(?<=^|[^A-Za-z0-9])(\*\*|__)(?=[^\s])([\s\S]*?[^\s])\1(?=$|[^A-Za-z0-9])/g, 
+      repl: (substr, grp1, grp2) => `\\textbf{${mdEmphasisToLatex(grp2)}}` },
+    { regex: /(?<=^|[^A-Za-z0-9])(\*|_)(?=[^\s])([\s\S]*?[^\s])\1(?=$|[^A-Za-z0-9])/g, 
+      repl: (substr, grp1, grp2) => `\\textit{${grp2}}` }
+  ];
+
+  // Apply patterns iteratively until no change
+  let out = markdown;
+  let prev;
+  do {
+    prev = out;
+    for (const p of patterns) {
+      out = out.replace(p.regex, p.repl);
+    }
+  } while (out !== prev);
+
+  return out;
+}
+
+const dealWithLatexFootnotes = (markdown, footnotes, options) => {
+  const refs = Array.from(markdown.matchAll(/<a href='#ref-[\s\S]*?<\/a>/g), m => m[0]);
+  for (let i = 0; i < refs.length && i < footnotes.length; i++) {
+    //in the future: \footnote[footnotes[i].label]{footnotes[i].content}
+    markdown = markdown.replace(refs[i], temporarilyEscapeLatex("\\ref{ref-" + (i+1) + "}"));
+  }
+
+  markdown += "\n";
+  if (options && options.footnotesLabel) markdown += options.footnotesLabel + "\n";
+  for (let i = 0; i < footnotes.length; i++) {
+    markdown += (i+1) + ". " + footnotes[i].content + 
+    temporarilyEscapeLatex(" \\label{ref-" + (i+1) + "}\n");
+  }
+
+  return markdown;
+}
+
+function validateTexLengthUnit(value) {
+  if (typeof value !== 'string') return false;
+  const s = value.trim();
+  if (s.length === 0) return false;
+  const re = /^[+-]?(?:\d+|\d*\.\d+|\d+\.\d*)(?:pt|bp|in|mm|cm|pc|em|ex|dd|cc|sp)$/;
+
+  return re.test(s);
+}
+
+const dealWithLatexImages = (markdown) => {
+  const imgs = Array.from(markdown.matchAll(/<figure\b[\s\S]*?<\/figure>/gi), m => m[0]);
+  for (let i = 0; i < imgs.length; i++) {
+    let m = imgs[i].match(/\bsrc\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i);
+    const src = m ? (m[1] ?? m[2] ?? m[3]) : null;
+    if (!src) continue;
+    
+    m = imgs[i].match(/\bstyle\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i);
+    const style = m ? (m[1] ?? m[2] ?? m[3]) : null;
+
+ 
+    m = style.match(/(?:^|[^-\w])width\s*:\s*([0-9]*\.?[0-9]+(?:[a-z%]+)?)/i);
+    let width = m ? m[1] : null;
+    if (!validateTexLengthUnit(width)) {
+      width = null;
+    }
+
+    m = style.match(/(?:^|[^-\w])height\s*:\s*([0-9]*\.?[0-9]+(?:[a-z%]+)?)/i);
+    let height = m ? m[1] : null;
+    if (!validateTexLengthUnit(height)) {
+      height = null;
+    }
+
+    m = style.match(/(?:^|[^-\w])float\s*:\s*(left|right)\b/i);
+    let float = m ? m[1] : null;
+
+    let optionalArguments = "";
+    if (width && height) {
+      optionalArguments = "[width=" + width + ",height=" + height + "]";
+    } else if (width) {
+      optionalArguments = "[width=" + width + "]";
+    } else if (height) {
+      optionalArguments = "[height=" + height + "]";
+    }
+
+    let latexImg = `\\includegraphics${optionalArguments}{${src}}`;
+    let latextContent = "";
+    if (float === "left") {
+      latextContent = `\\begin{flushleft} ${latexImg} \\end{flushleft}`;
+    } else if (float === "right") {
+      latextContent = `\\begin{flushright} ${latexImg} \\end{flushright}`;
+    } else {
+      latextContent = `\\begin{center} ${latexImg} \\end{center}`;
+    }
+
+    markdown = markdown.replace(imgs[i], temporarilyEscapeLatex(latextContent));
+  }
+
+  return markdown;
+}
+
+const mdLinksToLatex = (markdown) => {
+  // [text](url)
+  markdown = markdown.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (substr, grp1, grp2) => {
+    return temporarilyEscapeLatex(`\\href{${grp2}}{${escapeLatexDeleting(grp1)}}`);
+  });
+  // <url>
+  markdown = markdown.replace(/<(https?:\/\/[^ >]+|mailto:[^ >]+)>/gi, (substr, grp1) => {
+    return temporarilyEscapeLatex(`\\url{${grp1}}`);
+  });
+
+  return markdown;
+}
+
+const mdBlockquoteToLatex = (markdown) => {
+  markdown = markdown.replace(/(^>.*(\n>.*)*)/gm, (block) => {
+    return '\\begin{quote}\n' +
+      block
+        .split('\n')
+        .map(line => line.replace(/^>\s?/, ''))
+        .join('\n') +
+      '\n\\end{quote}';
+  });
+
+  markdown = markdown.replace(/```(?=[\s\S]*\S)([\s\S]+?)```/g, "\\begin{quote}\n$1\n\\end{quote}");
+  return markdown.replace(/`(?=[\s\S]*\S)([\s\S]+?)`/g, "\\texttt{$1}");
+}
+
+const mdHeadingsToLatex = (markdown) => {
+  return markdown.replace(/^\s*(#{1,6})\s*(.*?)\s*(?:#*\s*)$/gm, (_, hashes, content) => {
+    const level = hashes.length;
+    const ct = content.trim();
+    switch (level) {
+      case 1: return `\\section{${ct}}`;
+      case 2: return `\\subsection{${ct}}`;
+      case 3: return `\\subsubsection{${ct}}`;
+      case 4: return `\\paragraph{${ct}}`;
+      case 5: return `\\subparagraph{${ct}}`;
+      default: return `\\textbf{${ct}}`;
+    }
+  });
+}
+
+const dealWithTheDollar = (text) => {
+    text = text.replace(/(?<=^|\n)\$\$(?=\n|$)/g, '@@DOLLAR2@@');
+    text = text.replace(/(?<=^|\n)\$(?=\n|$)/g, '@@DOLLAR1@@');
+    text = text.replace(/(?<!\\)\$/g, '\\$');
+
+    text = text.replace(/@@DOLLAR2@@(.*?)@@DOLLAR2@@/s, (_, inner) => `@@DOLLAR2@@${temporarilyEscapeLatex(inner)}@@DOLLAR2@@`);
+    text = text.replace(/@@DOLLAR1@@(.*?)@@DOLLAR1@@/s, (_, inner) => `@@DOLLAR1@@${temporarilyEscapeLatex(inner)}@@DOLLAR1@@`);
+
+    text = text.replace(/@@DOLLAR2@@/g, () => '\$\$')
+    text = text.replace(/@@DOLLAR1@@/g, '\$');
+
+    return text;
+}
+
+const escapeLatexCompletely = (text) => {
+  text = dealWithTheDollar(text);
+  return text
+    .replace(/\\(?![A-Za-z]|[{}%$#_&^~\\])/g, '\\textbackslash{}')
+    .replace(/(?<!\\)#/g, '\\#')
+    .replace(/(?<!\\)_/g, '\\_')
+    .replace(/(?<!\\)%/g, '\\%')
+    .replace(/(?<!\\)&/g, '\\&')
+    .replace(/(?<!(?:\\|\\[A-Za-z]+|\\[A-Za-z]+.*\}|\\[A-Za-z]+.*\)|\\[A-Za-z]+.*\]))\{/g, '\\{')
+    .replace(/(?<!(?:\\|\\[A-Za-z]+.*))\}/g, '\\}')
+    .replace(/(?<!\\)~/g, '\\textasciitilde{}')
+    .replace(/(?<!\\)\^/g, '\\textasciicircum{}');
+  }
+
+const escapeLatexKeepingMdChars = (text) => {
+  text = dealWithTheDollar(text);
+  return text
+    .replace(/\\(?![A-Za-z]|[{}%$#_&^~\\])/g, '\\textbackslash{}')
+    .replace(/(?<!\\)%/g, '\\%')
+    .replace(/(?<!\\)&/g, '\\&')
+    .replace(/(?<!(?:\\|\\[A-Za-z]+|\\[A-Za-z]+.*\}|\\[A-Za-z]+.*\)|\\[A-Za-z]+.*\]))\{/g, '\\{')
+    .replace(/(?<!(?:\\|\\[A-Za-z]+.*))\}/g, '\\}')
+    .replace(/(?<!\\)~/g, '\\textasciitilde{}')
+    .replace(/(?<!\\)\^/g, '\\textasciicircum{}');
+}
+
+const escapeMdChars = (text) => {
+  return text
+    .replace(/(?<!\\)#/g, '\\#')
+    .replace(/(?<!\\)_/g, '\\_');
+}
+
+const escapeLatexDeleting = (text) => {
+  return text
+    .replace(/\\/g, '')
+    .replace(/%/g, '')
+    .replace(/\$/g, '')
+    .replace(/#/g, '')
+    .replace(/&/g, '')
+    .replace(/_/g, '')
+    .replace(/{/g, '')
+    .replace(/}/g, '')
+    .replace(/~/g, '')
+    .replace(/\^/g, '');
+}
+
+const temporarilyEscapeLatex =(text) => {
+  return text
+    .replace(/\\/g, '@--backslash--@')
+    .replace(/%/g, '@--percent--@')
+    .replace(/\$/g, '@--dollar--@')
+    .replace(/#/g, '@--hash--@')
+    .replace(/&/g, '@--ampersand--@')
+    .replace(/_/g, '@--underscore--@')
+    .replace(/{/g, '@--leftbrace--@')
+    .replace(/}/g, '@--rightbrace--@')
+    .replace(/~/g, '@--tilde--@')
+    .replace(/\^/g, '@--caret--@');
+}
+
+const unescapeTemporarilyEscapedLatex = (text) => {
+  return text
+    .replace(/@--backslash--@/g, '\\')
+    .replace(/@--percent--@/g, '%')
+    .replace(/@--dollar--@/g, '\$')
+    .replace(/@--hash--@/g, '#')
+    .replace(/@--ampersand--@/g, '&')
+    .replace(/@--underscore--@/g, '_')
+    .replace(/@--leftbrace--@/g, '{')
+    .replace(/@--rightbrace--@/g, '}')
+    .replace(/@--tilde--@/g, '~')
+    .replace(/@--caret--@/g, '\^');
+}
+
+const escapeHtmlInLatex = (text) => {
+  return text
+    .replace(/</g, '\\textless{}')
+    .replace(/>/g, '\\textgreater{}');
+}
+
+function spaceAfterAmpersand(text) {
+  return String(text).replace(/&(?=(?:[a-zA-Z][a-zA-Z0-9]+|#\d+|#x[0-9A-Fa-f]+);)/g, '&\\negthinspace{}');
+}
+
+//AI generated function (it works)
+const markdownListsToLatex = (markdown, options) => {
+  const lines = markdown.replace(/\r\n/g, '\n').split('\n');
+  const itemRegex = /^([ \t]*)([*+-]|\d+\.)[ \t]+(.*)$/;
+  const stack = []; // holds {env, indentWidth}
+  const out = [];
+
+  const envFor = m => (/^\d+\.$/.test(m) ? 'enumerate' : 'itemize');
+
+  const closeToStackLen = (len) => {
+    while (stack.length > len) out.push(`\\end{${stack.pop().env}}`);
+  };
+
+  for (const rawLine of lines) {
+    //adding some breaks when an empty new line is found
+    if (rawLine.length == 0 && options && options.newLineBreak) {
+      out.push(options.newLineBreak);
+      continue;
+    }
+
+    const m = rawLine.match(itemRegex);
+    if (!m) {
+      closeToStackLen(0);
+      out.push(rawLine);
+      continue;
+    }
+
+    // Normalize tabs to 4 spaces, measure indent width
+    const indentWidth = (m[1] || '').replace(/\t/g, '    ').length;
+    const env = envFor(m[2]);
+    const content = m[3];
+
+    // Determine target depth: find first stack entry with same indentWidth,
+    // or where indentWidth is greater than the previous entry, etc.
+    if (stack.length === 0) {
+      // start root level
+      stack.push({ env, indentWidth });
+      out.push(`\\begin{${env}}`);
+    } else {
+      const top = stack[stack.length - 1];
+
+      if (indentWidth === top.indentWidth) {
+        // same level: possibly switch env
+        if (top.env !== env) {
+          // close current level and open new env at same indent
+          closeToStackLen(stack.length - 1);
+          stack.push({ env, indentWidth });
+          out.push(`\\begin{${env}}`);
+        }
+      } else if (indentWidth > top.indentWidth) {
+        // deeper level: open new env
+        stack.push({ env, indentWidth });
+        out.push(`\\begin{${env}}`);
+      } else {
+        // shallower: pop until matching or until top.indentWidth < indentWidth < prev
+        while (stack.length && stack[stack.length - 1].indentWidth > indentWidth) {
+          out.push(`\\end{${stack.pop().env}}`);
+        }
+        // If exact match after popping, maybe switch env
+        if (stack.length && stack[stack.length - 1].indentWidth === indentWidth) {
+          if (stack[stack.length - 1].env !== env) {
+            out.push(`\\end{${stack.pop().env}}`);
+            stack.push({ env, indentWidth });
+            out.push(`\\begin{${env}}`);
+          }
+        } else {
+          // no matching indent, open a new level for this indent
+          stack.push({ env, indentWidth });
+          out.push(`\\begin{${env}}`);
+        }
+      }
+    }
+
+    out.push(`\\item ${content}`);
+  }
+
+  closeToStackLen(0);
+  return out.join('\n');
+}
+// End of "Handling LaTeX syntax"
 
 const addLeadingZero = function (num) {
   let numStr = num.toString();
@@ -2202,16 +2561,15 @@ const importModules = async function() {
     globalThis.marked = marked;
     globalThis.fs = fs;
   } else {
-    if (debug_mode === true || extensionEnvironment()) {
+      //Always same-origin
       const {default: sqlite3InitModule} = await import ("../dependencies/sqlite3/sqlite3.mjs");
       globalThis.sqlite3InitModule = sqlite3InitModule;
+    if (debug_mode === true || extensionEnvironment()) {
       await import ("../dependencies/twig/twig.min.js")
       globalThis.Twig = Twig;
       const {marked} = await import ("../dependencies/marked/marked.esm.js")
       globalThis.marked = marked;
     } else {
-      const {default: sqlite3InitModule} = await importFromCDN("https://cdn.jsdelivr.net/npm/@sqlite.org/sqlite-wasm@" + sqlite_version + "/sqlite-wasm/jswasm/sqlite3.mjs", "../dependencies/sqlite3/sqlite3.mjs");
-      globalThis.sqlite3InitModule = sqlite3InitModule;
       await importFromCDN("https://cdn.jsdelivr.net/npm/twig@" + twig_version + "/twig.min.js", "../dependencies/twig/twig.min.js")
       globalThis.Twig = Twig;
       const {marked} = await importFromCDN("https://cdn.jsdelivr.net/npm/marked@" + marked_version + "/lib/marked.esm.js", "../dependencies/marked/marked.esm.js")
