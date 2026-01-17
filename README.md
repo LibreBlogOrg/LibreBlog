@@ -1,16 +1,46 @@
+<img height=50 src="https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/images/icon.svg" />
+
 # LibreBlog
 
-**LibreBlog** is a static site generator that works entirely in your browser (as a browser extension or web page). This means you don't need to create an account or install any software. Just start crafting your articles :black_nib: :scroll:
+**LibreBlog** is an in-browser static site generator that supports Markdown, RIS references, and image embedding to create content-rich blogs. There are different types of articles, each with its own features.
+<br><br><br>
 
-It was created to help bloggers and journalists produce content without depending so heavily on cloud-based web development services. You can read more about our motivation [here](https://blog.libreblog.org/articles/motivation). 
+![LaTeX](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/latex.avif)
+*A LaTeX article with a math formula, an image, and a footnote.*
+<br><br>
 
-The main output of this software is a ZIP file (*public_html.zip*) containing the files and folders of your website. Hosting is not provided, so you will need to unzip and save these files somewhere to get your website online.
+![Analysis](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/analysis.avif)
+*The timeline and 'key elements' were generated from __relations__.*
+<br><br>
 
-Below is an overview of the features included in this project and those that are not. 
+![References](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/references.avif)
+*References are imported from one or more RIS files.*
+<br><br>
+
+![Editor](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/editor.avif)
+*Articles can be written using Markdown syntax and Twig code.*
+<br><br>
+
+![Inserting images](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/inserting-images.avif)
+*Simple image picker.
+<br><br>
+
+![Media library](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/media-library.avif)
+*Media library*
+<br><br>
+
+## Motivation
+
+LibreBlog was created to help bloggers and journalists produce content without depending so heavily on cloud-based web development services. You can read more about our motivation [here](https://blog.libreblog.org/articles/motivation). 
+
+The main output of this software is a ZIP file (*public_html.zip*) containing the files and folders of your website.
+
+## Features
 
 **Built-in**:
 * Content creation and editing tools
 * Basic search functionality (using JavaScript)
+* **LaTeX support** (in LaTeX articles)
 * Easy insertion of **references** in articles
 * Possibility of creating **relations** between articles to make them richer and provide more context
 * SEO optimization (Semantic HTML, Sitemap, Open Graph, Schema.org and Simple Dublin Core)
@@ -41,8 +71,6 @@ Below is an overview of the features included in this project and those that are
 * Editorial workflow
 * User management
 
-In short, LibreBlog is a piece of software that runs inside your browser and does not offer features that require a server. It is therefore more suited for bloggers and independent journalists than for large news websites.
-
 ## Installation
 
 The best way to use LibreBlog is to install it as a browser extension. That way, you can use it offline and you will not lose your content if our website goes down.
@@ -53,6 +81,21 @@ The best way to use LibreBlog is to install it as a browser extension. That way,
 2. Inside the repository folder, run: `npm install`.
 3. In the previous step, the necessary scripts will be copied to the *dependencies* folder, so you can delete the *node_modules* folder.
 4. Load the unpacked extension ([See how](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)).
+
+## How to easily test your website (and render LaTeX articles) 
+
+Because the preview window is sandboxed, LaTeX articles cannot be rendered in preview mode (We are using this project to render the LaTex content: <https://latex.js.org>).
+
+If you want to quickly preview your LaTeX articles while working on them, I recommend downloading [OnionShare](https://onionshare.org/) and [Tor](https://www.torproject.org/download/).
+
+**Steps**:
+
+1. Generate public_html.zip and unzip it.
+2. Open OnionShare, choose Host a Website, and select the public_html folder.
+3. Check the option "Don't send default Content Security Policy header".
+4. Open your website in Tor.
+
+Note: For links to work, keep *Remove ".html" from page URLs* unselected on the editor's Settings page.
 
 ## Limitations
 
@@ -70,20 +113,3 @@ These other projects are also being used:
 * [Marked](https://github.com/markedjs/marked) - to convert Markdown content generated by users into HTML
 * [Ace](https://github.com/ajaxorg/ace) - text editor for both website content and templates
 * [JSZip](https://github.com/Stuk/jszip) - used only to generate the *public_html.zip*
-
-## Screenshots
-
-![Analysis](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/analysis.avif)
-*An example of how __relations__ can enrich articles. The timeline and 'key elements' were generated from relations.*
-
-![References](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/references.avif)
-*References are imported from one or more RIS files.*
-
-![Editor](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/editor.avif)
-*Articles can be written using Markdown syntax and Twig code.*
-
-![Inserting images](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/inserting-images.avif)
-*Simple image picker. The __theme__ takes care of inserting versions of the image with the appropriate size.*
-
-![Media library](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/media-library.avif)
-*Media library*
