@@ -22,7 +22,7 @@
 <br><br>
 
 ![Inserting images](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/inserting-images.avif)
-*Simple image picker.
+*Simple image picker.*
 <br><br>
 
 ![Media library](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/media-library.avif)
