@@ -9,7 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- LaTeX rendering support
 - Warning informing users that the editor works best in Chromium‑based browsers.
+
+### Fixed
+
+- Image insertion
 
 ## [1.2.3] - 2026-01-06
 
