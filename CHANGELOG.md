@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Improved
 
 - Changed reference style
+- Customizable footnote label in the LaTeX article
 
 ## [1.3.0] - 2026-01-17
 
