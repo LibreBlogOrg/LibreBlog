@@ -29,4 +29,7 @@ if (fs.existsSync('node_modules')) {
   dependencies.forEach(({ src, dest }) => {      
     execSync(`copyfiles -V -f ${src} ${dest}`, { stdio: 'inherit' });
   });
+
+  fs.rmSync('node_modules', { recursive: true, force: true });
+  console.log('node_modules removed');
 }
