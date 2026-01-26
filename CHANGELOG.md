@@ -9,19 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Improved
 
-- Changed reference style
-- Customizable footnote label in the LaTeX article
+- Changed reference style.
+- Customizable footnote label in the LaTeX article.
+- NPM: Remove 'node_modules' directory after copying dependencies.
 
 ## [1.3.0] - 2026-01-17
 
 ### Added
 
-- LaTeX rendering support
+- LaTeX rendering support.
 - Warning informing users that the editor works best in Chromium‑based browsers.
 
 ### Fixed
 
-- Image insertion
+- Image insertion.
 
 ## [1.2.3] - 2026-01-06
 
