@@ -1,0 +1,29 @@
+name: Copy SQLite3 Files
+
+on:
+  workflow_dispatch:
+
+jobs:
+  copy-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Copy Files from sqlite/sqlite-wasm
+        run: |
+          mkdir -p dependencies/sqlite3
+          curl -L -o dependencies/sqlite3/sqlite3-opfs-async-proxy.js https://raw.githubusercontent.com/sqlite/sqlite-wasm/main/src/bin/sqlite3-opfs-async-proxy.js
+          curl -L -o dependencies/sqlite3/sqlite3.mjs https://raw.githubusercontent.com/sqlite/sqlite-wasm/main/src/bin/sqlite3.mjs
+          curl -L -o dependencies/sqlite3/sqlite3.wasm https://raw.githubusercontent.com/sqlite/sqlite-wasm/main/src/bin/sqlite3.wasm
+      
+      - name: Commit changes
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add dependencies/sqlite3/*
+          git commit -m "Copy sqlite3 files" || echo "No changes to commit"
+          git push
