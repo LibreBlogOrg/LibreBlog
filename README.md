@@ -52,9 +52,9 @@ The main output of this software is a ZIP file (*public_html.zip*) containing th
 * Possibility of exporting and importing all the content used to generate your website
 * Website preview (using iframes)
 * Designed to be easily extensible: customize themes and templates, create your own types of articles, sections, etc.
-* String Customization
+* String customization
 * No cookies, no tracking, almost no JavaScript (only for enabling search and sharing functionalities, and to adjust dates)
-* The input fields of this project were designed with journalists in mind (Summary, Editorial Notes...)
+* The input fields were designed with journalists in mind (Summary, Editorial Notes...)
 * Possibility of installing LibreBlog as a Chrome Extension
 
 **Not provided** (but you can easily add these features using external web services):
