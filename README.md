@@ -26,7 +26,7 @@
 <br><br>
 
 ![Media library](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/media-library.avif)
-*Media library*
+*Media library.*
 <br><br>
 
 ## Motivation
@@ -43,7 +43,7 @@ The main output of this software is a ZIP file (*public_html.zip*) containing th
 * **LaTeX support** (in LaTeX articles)
 * Easy insertion of **references** in articles
 * Possibility of creating **relations** between articles to make them richer and provide more context
-* SEO optimization (Semantic HTML, Sitemap, Open Graph, Schema.org and Simple Dublin Core)
+* SEO (Semantic HTML, Sitemap, Open Graph, Schema.org and Simple Dublin Core)
 * Responsive design
 * Pagination
 * RSS for the main page and sections
