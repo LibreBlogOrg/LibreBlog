@@ -2023,18 +2023,18 @@ Options -Indexes
     const navbar = globalThis.document.getElementById("vertical-navbar");
     let innerHTML = `
       <ul>
-        <li class="active"><a title="Dashboard" href="/index.html"><img class="icon" src="images/dashboard.svg"/></a></li>
-        <li><a title="Articles" href="/articles.html"><img class="icon" src="images/articles.svg"/></a></li>
-        <li><a title="Series" href="/series.html"><img class="icon" src="images/series.svg"/></a></li>
-        <li><a title="Sections" href="/sections.html"><img class="icon" src="images/sections.svg"/></a></li>
-        <li><a title="Relations" href="/relations.html"><img class="icon" src="images/relations.svg"/></a></li>
-        <li><a title="Sources" href="/sources.html"><img class="icon" src="images/sources.svg"/></a></li>
-        <li><a title="Navigation" href="/navbar.html"><img class="icon" src="images/navbar.svg"/></a></li>
-        <li><a title="Media" href="/media.html"><img class="icon" src="images/media.svg"/></a></li>
-        <li><a title="Authors" href="/authors.html"><img class="icon" src="images/authors.svg"/></a></li>
-        <li><a title="Appearance" href="/appearance.html"><img class="icon" src="images/appearance.svg"/></a></li>
-        <li><a title="Templates" href="/templates.html"><img class="icon" src="images/templates.svg"/></a></li>
-        <li><a title="Settings" href="/settings.html"><img class="icon" src="images/settings.svg"/></a></li>
+        <li class="active"><a title="Dashboard" href="index.html"><img class="icon" src="images/dashboard.svg"/></a></li>
+        <li><a title="Articles" href="articles.html"><img class="icon" src="images/articles.svg"/></a></li>
+        <li><a title="Series" href="series.html"><img class="icon" src="images/series.svg"/></a></li>
+        <li><a title="Sections" href="sections.html"><img class="icon" src="images/sections.svg"/></a></li>
+        <li><a title="Relations" href="relations.html"><img class="icon" src="images/relations.svg"/></a></li>
+        <li><a title="Sources" href="sources.html"><img class="icon" src="images/sources.svg"/></a></li>
+        <li><a title="Navigation" href="navbar.html"><img class="icon" src="images/navbar.svg"/></a></li>
+        <li><a title="Media" href="media.html"><img class="icon" src="images/media.svg"/></a></li>
+        <li><a title="Authors" href="authors.html"><img class="icon" src="images/authors.svg"/></a></li>
+        <li><a title="Appearance" href="appearance.html"><img class="icon" src="images/appearance.svg"/></a></li>
+        <li><a title="Templates" href="templates.html"><img class="icon" src="images/templates.svg"/></a></li>
+        <li><a title="Settings" href="settings.html"><img class="icon" src="images/settings.svg"/></a></li>
       </ul>
       <a id="logo-bottom" href="https://libreblog.org"><img src="images/short-logo.svg" width="20px" /></a>
     `;
