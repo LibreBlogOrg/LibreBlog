@@ -1979,17 +1979,9 @@ Options -Indexes
           event.preventDefault();
           let href = event.srcElement.attributes['href'];
           if (!href) href = event.srcElement.parentElement.attributes['href']; 
-          let hrefValue = href.value;
-          
-          if (hrefValue === globalThis.lb.globalVariables()['website_url'] || hrefValue === "/") {
-            hrefValue = "/index.html";
-          } else {
-            hrefValue += globalThis.lb.dotHtmlForLinks() ? "" : ".html";
-            if (hrefValue.startsWith(globalThis.lb.globalVariables()['website_url'])) {
-              hrefValue = hrefValue.replace(globalThis.lb.globalVariables()['website_url'], "");
-            } else if (hrefValue.startsWith("http")) {
-              return;
-            }
+          let hrefValue = fixHrefValue(href.value);
+          if (hrefValue.startsWith("http")) {
+            return;
           }
           
           generateWebsite(false, (wf) => loadFileIntoIframe(wf, hrefValue, iframe));
@@ -2004,6 +1996,19 @@ Options -Indexes
 
       if (callback) callback();
     });
+  }
+
+  const fixHrefValue = function(hrefValue) {
+    if (hrefValue === globalThis.lb.globalVariables()['website_url'] || hrefValue === "/") {
+      hrefValue = "/index.html";
+    } else {
+      hrefValue += globalThis.lb.dotHtmlForLinks() ? "" : ".html";
+      if (hrefValue.startsWith(globalThis.lb.globalVariables()['website_url'])) {
+        hrefValue = hrefValue.replace(globalThis.lb.globalVariables()['website_url'], "");
+      }
+    }
+
+    return hrefValue;
   }
 
   const removeLogo = function() {
@@ -2042,6 +2047,17 @@ Options -Indexes
   }
 
   const loadFileIntoIframe = function(wFolder, path, iframe) {
+    const [xmlDoc, styles] = preparePageForPreview(wFolder, path);
+
+    const doc = iframe.contentDocument;
+    doc.documentElement.innerHTML = xmlDoc.getElementsByTagName("html")[0].innerHTML;
+    doc.documentElement.getElementsByTagName("head")[0].innerHTML += styles; 
+    enableSearch(doc);
+    enableShareButton(doc);
+    formatDates(doc);
+  }
+
+  const preparePageForPreview = function(wFolder, path) {
     if (path.startsWith("/")) path = path.substring(1);
     
     let file = wFolder.getFile(path);
@@ -2073,11 +2089,7 @@ Options -Indexes
       }
     }
 
-    iframe.contentDocument.documentElement.innerHTML = xmlDoc.getElementsByTagName("html")[0].innerHTML;
-    iframe.contentDocument.documentElement.getElementsByTagName("head")[0].innerHTML += styles; 
-    enableIframeSearch();
-    enableShareButton();
-    formatIframeDates();
+    return [xmlDoc, styles];
   }
 
   const createElementStr = function(data, tag) {
@@ -2088,11 +2100,10 @@ Options -Indexes
     return "";
   }
 
-  const formatIframeDates = function() {
-    const iframe = globalThis.document.getElementById("preview-iframe");
-    if (!iframe) return;
+  const formatDates = function(doc) {
+    if (!doc) return;
 
-    const itemDates = iframe.contentDocument.getElementsByClassName("item-date");
+    const itemDates = doc.getElementsByClassName("item-date");
     if (!itemDates || itemDates.length === 0) return;
 
     const formatDate = function(dateStr, options) {
@@ -2116,14 +2127,14 @@ Options -Indexes
     }
   }
 
-  const enableIframeSearch = function() {
+  const enableSearch = function(doc) {
+    if (!doc) return;
     const libreblogSearch = globalThis.lb.getLibreblogSearch();
-    const iframe = globalThis.document.getElementById("preview-iframe");
-    if (!iframe) return;
-    const searchInput = iframe.contentDocument.getElementById("search-input");
+    const searchInput = doc.getElementById("search-input");
     if (!searchInput) return;
+
     searchInput.addEventListener("input", (event) => {
-      const wrapper = iframe.contentDocument.getElementById("search-box-wrapper");
+      const wrapper = doc.getElementById("search-box-wrapper");
       if (!wrapper) return;
       let value = event.target.value;
 
@@ -2163,10 +2174,9 @@ Options -Indexes
     });
   }
 
-  const enableShareButton = function() {
-    const iframe = globalThis.document.getElementById("preview-iframe");
-    if (!iframe) return;
-    const shareButton = iframe.contentDocument.getElementById("share-button");
+  const enableShareButton = function(doc) {
+    if (!doc) return;
+    const shareButton = doc.getElementById("share-button");
     if (!shareButton) return;
 
     const url = shareButton.attributes["data-url"].value;
@@ -2352,6 +2362,7 @@ Options -Indexes
   
   const initSettingsFormHandlers = function() {
     processSettingsFormField("twig-inside-articles", "change", null);
+    processSettingsFormField("preview-in-new-tab", "change", null);
     processSettingsFormField("rss-for-mainpage", "change", null);
     processSettingsFormField("rss-for-sections", "change", null);
     processSettingsFormField("remove-dot-html", "change", null);
@@ -3115,11 +3126,47 @@ Options -Indexes
     modal.style.display = "flex";
   }
 
-  const openPreviewModal = function(page) {
+  const openPreviewModal = function(pagePath) {
     const modal = globalThis.document.getElementById("preview-modal");
     modal.style.display = "flex";
     
-    previewWebsite('preview-container', page, null);
+    previewWebsite('preview-container', pagePath, null);
+  }
+
+  const openPreviewWindow = function(pagePath) {
+    const newTab = window.open();
+    const doc = newTab.document;
+    
+    const loadPage = (d, pP) => generateWebsite(false, (wF) => {
+      const [xmlDoc, styles] = preparePageForPreview(wF, pP);
+      d.documentElement.innerHTML = xmlDoc.getElementsByTagName("html")[0].innerHTML;
+      d.documentElement.getElementsByTagName("head")[0].innerHTML += styles;
+      enableSearch(d);
+      enableShareButton(d);
+      formatDates(d);
+    });
+
+    loadPage(doc, pagePath);
+
+    doc.addEventListener("click", (event) => {
+      if (!event.target) return;
+      
+      if (clickCameFromA(event.target)) {
+        event.preventDefault();
+        let href = event.target.attributes['href'];
+        if (!href) href = event.target.parentElement.attributes['href']; 
+        let hrefValue = fixHrefValue(href.value);
+        if (hrefValue.startsWith("http")) {
+          return;
+        }
+        
+        loadPage(doc, hrefValue);
+      }
+    });
+
+    doc.addEventListener("submit", (event) => {
+      event.preventDefault();
+    });
   }
 
   const openMediaModal = function(type, callback) { //the type is always "image" for now
@@ -3784,7 +3831,11 @@ Options -Indexes
       buttons.push(["button", {
                 ref: "previewButton",
                 onclick: () => {
-                  openPreviewModal(pagePath);
+                  if (globalThis.lb.getSetting("preview-in-new-tab") === 'true') {
+                    openPreviewWindow(pagePath);
+                  } else {
+                    openPreviewModal(pagePath);
+                  }
                 }
               }, ""]);
       hasPrev = true;
@@ -3948,6 +3999,7 @@ Options -Indexes
           await globalThis.lb.setSetting("main-js", default_main_js);
           await globalThis.lb.setSetting("twig-inside-articles", "true");
           await globalThis.lb.setSetting("rss-for-mainpage", "true");
+          await globalThis.lb.setSetting("preview-in-new-tab", "true");
           await globalThis.lb.setSetting("share-button", "true");
           await globalThis.lb.setSetting("articles-in-author-profile", "true");
           await globalThis.lb.setSetting("article-in-feedback", "false");
