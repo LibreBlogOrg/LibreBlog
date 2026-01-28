@@ -1,5 +1,6 @@
 const startSqlite3 = async function(messageId, callback) {
   const {default: sqlite3InitModule} = await import ("../dependencies/sqlite3/sqlite3.mjs");
+  self.sqlite3InitModule = sqlite3InitModule;
   try {
     self.sqlite3InitModule({
       print: self.console.log,
