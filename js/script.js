@@ -3481,7 +3481,8 @@ Options -Indexes
 
   const thisPage = function() {
     const url = globalThis.location.href;
-    return url.split('/')[3].split(".html")[0];
+    const parts = url.split('/');
+    return parts[parts.length - 1].split(".html")[0];
   }
 
   const loadTemplates = function(){
