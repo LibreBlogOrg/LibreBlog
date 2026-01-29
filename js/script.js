@@ -4236,16 +4236,6 @@ Options -Indexes
 
   /** Main **/
 
-  const extensionEnvironment = function() {
-    if (typeof browser !== 'undefined' && typeof browser.runtime !== 'undefined') {
-      return "Firefox extension";
-    } else if (typeof chrome !== 'undefined' && typeof chrome.runtime !== 'undefined') {
-      return "Chrome extension";
-    } else {
-      return null;
-    }
-  }
-
   const loadWebsiteDependencies = async function() {
     const page = thisPage();
     
@@ -4267,7 +4257,7 @@ Options -Indexes
     }
   }
 
-  const start = async function(lb) {
+  const start = async function() {
     if (globalThis.localStorage.getItem("tables-created") !== "true") showLoader();
     preFormatThead();
 
