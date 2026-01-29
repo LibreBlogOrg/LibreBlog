@@ -78,7 +78,7 @@ The best way to use LibreBlog is to install it as a browser extension. That way,
 **Installation steps**:
 
 1. Clone/Download this repository.
-2. (Optional) Inside the repository folder, run: `npm install`. Only run this if you want to install or update dependencies locally.
+2. (Optional) Inside the repository folder, run: `npm install`. Only run this if you want to (re)install or update dependencies locally.
 3. Load the unpacked extension ([See how](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)).
 
 ## How to easily test your website (and render LaTeX articles) 
