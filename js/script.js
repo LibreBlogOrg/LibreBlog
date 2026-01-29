@@ -10,12 +10,9 @@
   
   /* Constants and default values */
 
-  const debug_mode = false;
   const thumbnail_column = "Thumbnail";
   const supported_formats = ["JPG", "JPEG", "PNG", "APNG", "GIF", "SVG", "WEBP", "AVIF", "ICO"]; 
   const supported_version_formats = ["JPG", "JPEG", "PNG", "WEBP"];
-  const jszip_version = "3.10.1";
-  const ace_builds_version = "1.41.0";
   const default_footer_social_snippet = `<a href="PASTE YOUR NEWSLETTER URL HERE" id="subscribe-button" target="_blank"> Subscribe </a>
 
 <!-- Simply enter the URLs of your social media pages in the segments marked in capital letters. You can delete any unused platform sections, which are indicated by the comments: "[Platform]:start" and "[Platform]:end". For SVGs of other social media platforms, visit svgrepo.com . -->
@@ -4249,54 +4246,24 @@ Options -Indexes
     }
   }
 
-  const importFromCDN = async function(cdn, local) {
-    if (!cdn) return await import(local);
-    
-    try {
-      return await import(cdn);
-    } catch (error) {
-      console.error('Failed to load module from this URL: ', cdn);
-      return await import(local);
-    }
-  }
-
   const loadWebsiteDependencies = async function() {
     const page = thisPage();
     
-    if (debug_mode === true || extensionEnvironment()) {
-      if (["index", "settings"].includes(page)) {
-        await import ("../dependencies/jszip/jszip.min.js");
-      }
-      
-      if (["article-edit", "series-edit", "section-edit", "relation-edit", "author-edit", "settings", "templates"].includes(page)) {
-        await import ("../dependencies/ace/ace.js");
-        await import ("../dependencies/ace/ext-language_tools.js");
-        await import ("../dependencies/ace/mode-markdown.js");
-        await import ("../dependencies/ace/mode-twig.js");
-        await import ("../dependencies/ace/mode-html.js");
-        await import ("../dependencies/ace/mode-css.js");
-        await import ("../dependencies/ace/mode-javascript.js");
-        await import ("../dependencies/ace/mode-xml.js");
-        await import ("../dependencies/ace/theme-github_light_default.js");
-        ace.config.set('basePath', '../dependencies/ace');
-      }
-    } else {
-      if (["index", "settings"].includes(page)) {
-        await importFromCDN("https://cdn.jsdelivr.net/npm/jszip@" + jszip_version + "/dist/jszip.min.js", "../dependencies/jszip/jszip.min.js");
-      }
-      
-      if (["article-edit", "series-edit", "section-edit", "relation-edit", "author-edit", "settings", "templates"].includes(page)) {
-        await importFromCDN("https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min/ace.js", "../dependencies/ace/ace.js");
-        await importFromCDN("https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min/ext-language_tools.js", "../dependencies/ace/ext-language_tools.js");
-        await importFromCDN("https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min/mode-markdown.js", "../dependencies/ace/mode-markdown.js");
-        await importFromCDN("https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min/mode-twig.js", "../dependencies/ace/mode-twig.js");
-        await importFromCDN("https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min/mode-html.js", "../dependencies/ace/mode-html.js");
-        await importFromCDN("https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min/mode-css.js", "../dependencies/ace/mode-css.js");
-        await importFromCDN("https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min/mode-javascript.js", "../dependencies/ace/mode-javascript.js");
-        await importFromCDN("https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min/mode-xml.js", "../dependencies/ace/mode-xml.js");
-        await importFromCDN("https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min/theme-github_light_default.js", "../dependencies/ace/theme-github_light_default.js");
-        ace.config.set('basePath', "https://cdn.jsdelivr.net/npm/ace-builds@" + ace_builds_version + "/src-min");
-      }
+    if (["index", "settings"].includes(page)) {
+      await import ("../dependencies/jszip/jszip.min.js");
+    }
+    
+    if (["article-edit", "series-edit", "section-edit", "relation-edit", "author-edit", "settings", "templates"].includes(page)) {
+      await import ("../dependencies/ace/ace.js");
+      await import ("../dependencies/ace/ext-language_tools.js");
+      await import ("../dependencies/ace/mode-markdown.js");
+      await import ("../dependencies/ace/mode-twig.js");
+      await import ("../dependencies/ace/mode-html.js");
+      await import ("../dependencies/ace/mode-css.js");
+      await import ("../dependencies/ace/mode-javascript.js");
+      await import ("../dependencies/ace/mode-xml.js");
+      await import ("../dependencies/ace/theme-github_light_default.js");
+      ace.config.set('basePath', '../dependencies/ace');
     }
   }
 
@@ -4304,17 +4271,10 @@ Options -Indexes
     if (globalThis.localStorage.getItem("tables-created") !== "true") showLoader();
     preFormatThead();
 
-    if (debug_mode === true || extensionEnvironment()) {
-      const {default: libreblog} = await import ("../libreblog/libreblog.js");
-      globalThis.lb = libreblog;
-      const {default: defaultTheme} = await import ("../themes/default-theme.js");
-      globalThis.default_theme = defaultTheme;
-    } else { //TODO: insert the URLs of the scripts
-      const {default: libreblog} = await importFromCDN(null, "../libreblog/libreblog.js"); 
-      globalThis.lb = libreblog;
-      const {default: defaultTheme} = await importFromCDN(null, "../themes/default-theme.js");
-      globalThis.default_theme = defaultTheme;
-    }
+    const {default: libreblog} = await import ("../libreblog/libreblog.js");
+    globalThis.lb = libreblog;
+    const {default: defaultTheme} = await import ("../themes/default-theme.js");
+    globalThis.default_theme = defaultTheme;
     
     await loadWebsiteDependencies();
     await globalThis.lb.createMediaWorker();
