@@ -50,7 +50,11 @@ jobs:
           npx copyfiles -V -f node_modules/ace-builds/src-min/mode-javascript.js dependencies/ace/
           npx copyfiles -V -f node_modules/ace-builds/src-min/mode-html.js dependencies/ace/
           npx copyfiles -V -f node_modules/ace-builds/src-min/mode-css.js dependencies/ace/
+          npx copyfiles -V -f node_modules/ace-builds/src-min/mode-json.js dependencies/ace/
           npx copyfiles -V -f node_modules/ace-builds/src-min/mode-markdown.js dependencies/ace/
+          npx copyfiles -V -f node_modules/ace-builds/src-min/worker-xml.js dependencies/ace/
+          npx copyfiles -V -f node_modules/ace-builds/src-min/worker-javascript.js dependencies/ace/
+          npx copyfiles -V -f node_modules/ace-builds/src-min/worker-css.js dependencies/ace/
           npx copyfiles -V -f node_modules/ace-builds/src-min/ace.js dependencies/ace/
           npx copyfiles -V -f "node_modules/ace-builds/src-min/ext-*" dependencies/ace/
           npx copyfiles -V -f node_modules/ace-builds/src-min/theme-github_light_default.js dependencies/ace/
