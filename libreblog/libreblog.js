@@ -15,12 +15,8 @@ let RIS_MAP;
 /* Global variables and constants */
 
 const libreblog_version = "1.3.1";
-const twig_version = "1.17.1";
-//const sqlite_version = "3.49.2-build1";
-const marked_version = "15.0.12";
 //MIME types supported by most browsers in the HTMLCanvasElement interface
 const supported_version_formats = ["JPG", "JPEG", "PNG", "WEBP"];
-const debug_mode = false; //If false, it will load modules from a CDN
 let conversion_cache = {}; //Used to store previous conversions from Markdown to HTML
 let declared_values_cache = {}; //Values that are declared inside the field "contents"
 let references_cache = {}; //Used to store all the references of all the articles
@@ -2519,27 +2515,6 @@ const inNode = function() {
   return typeof process !== 'undefined' && process.versions && process.versions.node;
 }
 
-const extensionEnvironment = function() {
-  if (typeof browser !== 'undefined' && typeof browser.runtime !== 'undefined') {
-    return "Firefox extension";
-  } else if (typeof chrome !== 'undefined' && typeof chrome.runtime !== 'undefined') {
-    return "Chrome extension";
-  } else {
-    return null;
-  }
-}
-
-const importFromCDN = async function(cdn, local) {
-  if (!cdn) return await import(local);
-  
-  try {
-    return await import(cdn);
-  } catch (error) {
-    console.error('Failed to load module from this URL: ', cdn);
-    return await import(local);
-  }
-}
-
 const importOwnModules = async function() {
   const {default: logo} = await import ('./libreblog-logo.js');
   const {default: map} = await import ('./rismap.js');
@@ -2561,20 +2536,12 @@ const importModules = async function() {
     globalThis.marked = marked;
     globalThis.fs = fs;
   } else {
-      //Always same-origin
-      const {default: sqlite3InitModule} = await import ("../dependencies/sqlite3/sqlite3.mjs");
-      globalThis.sqlite3InitModule = sqlite3InitModule;
-    if (debug_mode === true || extensionEnvironment()) {
-      await import ("../dependencies/twig/twig.min.js")
-      globalThis.Twig = Twig;
-      const {marked} = await import ("../dependencies/marked/marked.esm.js")
-      globalThis.marked = marked;
-    } else {
-      await importFromCDN("https://cdn.jsdelivr.net/npm/twig@" + twig_version + "/twig.min.js", "../dependencies/twig/twig.min.js")
-      globalThis.Twig = Twig;
-      const {marked} = await importFromCDN("https://cdn.jsdelivr.net/npm/marked@" + marked_version + "/lib/marked.esm.js", "../dependencies/marked/marked.esm.js")
-      globalThis.marked = marked;
-    }
+    const {default: sqlite3InitModule} = await import ("../dependencies/sqlite3/sqlite3.mjs");
+    globalThis.sqlite3InitModule = sqlite3InitModule;
+    await import ("../dependencies/twig/twig.min.js")
+    globalThis.Twig = Twig;
+    const {marked} = await import ("../dependencies/marked/marked.esm.js")
+    globalThis.marked = marked;
   }
 }
 
