@@ -3482,6 +3482,10 @@ Options -Indexes
   const thisPage = function() {
     const url = globalThis.location.href;
     const parts = url.split('/');
+	if (parts[parts.length - 1] === '') {
+	  return "index";
+	}	
+	  
     return parts[parts.length - 1].split(".html")[0];
   }
 
