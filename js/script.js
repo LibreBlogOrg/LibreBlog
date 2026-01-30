@@ -4262,12 +4262,12 @@ Options -Indexes
     if (globalThis.localStorage.getItem("tables-created") !== "true") showLoader();
     preFormatThead();
 
+	await loadWebsiteDependencies();
     const {default: libreblog} = await import ("../libreblog/libreblog.js");
     globalThis.lb = libreblog;
     const {default: defaultTheme} = await import ("../themes/default-theme.js");
     globalThis.default_theme = defaultTheme;
     
-    await loadWebsiteDependencies();
     await globalThis.lb.createMediaWorker();
     await globalThis.lb.importModules();
     await globalThis.lb.startDb();
