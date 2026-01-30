@@ -3,6 +3,8 @@
 # LibreBlog
 
 **LibreBlog** is an in-browser static site generator that supports Markdown, RIS references, and image embedding to create content-rich blogs. There are different types of articles, each with its own features.
+
+The site is available at <https://editor2.libreblog.org/LibreBlog/> — a mirror of the GitHub Pages site (<https://libreblogorg.github.io/LibreBlog/>). GitHub Pages doesn’t support the COOP/COEP headers required for proper operation.
 <br><br><br>
 
 ![LaTeX](https://raw.githubusercontent.com/LibreBlogOrg/LibreBlog-Resources/refs/heads/main/screenshots/latex.avif)
