@@ -14,7 +14,7 @@ let RIS_MAP;
 
 /* Global variables and constants */
 
-const libreblog_version = "1.3.1";
+const libreblog_version = "1.3.2";
 //MIME types supported by most browsers in the HTMLCanvasElement interface
 const supported_version_formats = ["JPG", "JPEG", "PNG", "WEBP"];
 let conversion_cache = {}; //Used to store previous conversions from Markdown to HTML
