@@ -7,9 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
+## [1.3.2] - 2026-02-02
+
+### Improved
 
 - Option to preview articles in a new tab.
+- Pre‑installed dependencies to enable the GitHub Pages site.
+
+### Fixed
+
+- Minor bug fixes.
 
 ## [1.3.1] - 2026-01-27
 
