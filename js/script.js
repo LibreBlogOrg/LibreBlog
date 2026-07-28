@@ -556,7 +556,7 @@ Options -Indexes
 
   const makeALink = function(table, id, uri, text) {
     if(!["navbar_items", "sources"].includes(table)) {
-      return "<a href='/" + getEditPageFromTable(table) + ".html?uri=" +
+      return "<a href='" + getEditPageFromTable(table) + ".html?uri=" +
         uri + "'><div>" + escapeHTML(text) + "</div></a>";
     } else if (id === "sources-table") {
       return "<a source-uri='" + uri + "' href='#source-modal'><div source-uri='" + uri + "'>" + escapeHTML(text) + "</div></a>"
